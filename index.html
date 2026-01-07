@@ -19,14 +19,12 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         body { background-color: var(--bg); color: #fff; overflow-x: hidden; scroll-behavior: smooth; }
 
-        /* Animated Background Gradients */
         .bg-glow {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at 50% 50%, #102a43 0%, #050505 100%);
             z-index: -1;
         }
 
-        /* Hero Section with Glassmorphism */
         header {
             height: 100vh; display: flex; flex-direction: column;
             justify-content: center; align-items: center; position: relative;
@@ -45,7 +43,6 @@
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        /* Interactive Cards */
         .container { max-width: 1200px; margin: auto; padding: 80px 20px; }
         .section-header { margin-bottom: 60px; text-align: left; }
         .section-header h2 { font-size: 3rem; color: var(--accent); }
@@ -65,22 +62,18 @@
             box-shadow: 0 15px 30px rgba(0, 242, 255, 0.1);
         }
 
-        /* Skill Pills */
         .pill {
             display: inline-block; padding: 8px 18px; margin: 5px;
             border-radius: 50px; background: rgba(0, 242, 255, 0.1);
             color: var(--accent); border: 1px solid var(--accent); font-size: 0.85rem;
         }
 
-        /* Advanced Button */
         .btn-main {
             padding: 18px 45px; border-radius: 50px; background: linear-gradient(45deg, var(--accent-dark), var(--accent));
             color: white; text-decoration: none; font-weight: 600; text-transform: uppercase;
             letter-spacing: 2px; box-shadow: 0 10px 30px rgba(0, 97, 255, 0.4); transition: 0.3s;
         }
-        .btn-main:hover { letter-spacing: 4px; box-shadow: 0 15px 40px rgba(0, 242, 255, 0.5); }
 
-        /* Experience Timeline */
         .exp-box { border-left: 3px solid var(--accent); padding-left: 30px; position: relative; margin-bottom: 40px; }
         .exp-box::before {
             content: ''; position: absolute; left: -10px; top: 0;
@@ -143,23 +136,14 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="section-header">
-            <h2>Technical <span>Stack</span></h2>
-        </div>
-        <div class="glass-card" style="text-align: center;">
-            <span class="pill">JAVA</span> <span class="pill">C++</span> <span class="pill">C</span> 
-            <span class="pill">HTML5</span> <span class="pill">CSS3</span> <span class="pill">JavaScript</span> 
-            <span class="pill">IoT</span> <span class="pill">Advanced Excel</span> <span class="pill">Prompt Engineering</span>
-            <span class="pill">Generative AI</span> <span class="pill">GitHub</span>
-        </div>
-    </div>
-
-    <footer>
+    <footer id="footer">
         <h2 style="margin-bottom: 20px;">Let's Build the Future</h2>
         <p>Email: PRASUNJAIN006@GMAIL.COM | WhatsApp: +91-8824937013</p>
         <p style="margin-top: 30px; color: #555;">&copy; 2026 Prasun Jain. Crafted for High-Level Placements.</p>
     </footer>
 
-</body>
+    <script>
+    (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="pGyU9d7icymw-RX_dqLbT";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+    </script>
+    </body>
 </html>
