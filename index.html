@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prasun Jain | The AI & Business Architect</title>
+    <title>Prasun Jain | AI Architect & Business Intelligence Leader</title>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
 
     <style>
@@ -20,78 +19,68 @@
             --glow: rgba(0, 242, 255, 0.3);
         }
 
-        /* Base Styling */
+        /* Global Reset */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
-        body { background: var(--bg-dark); color: #ffffff; overflow-x: hidden; line-height: 1.6; }
+        body { background: var(--bg-dark); color: #ffffff; overflow-x: hidden; line-height: 1.7; }
         
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-dark); }
         ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
 
-        /* Background Animated Particles Placeholder */
-        #bg-canvas { position: fixed; top: 0; left: 0; z-index: -1; }
-
         /* Navigation */
-        nav { position: fixed; width: 100%; padding: 25px 8%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(1, 4, 9, 0.8); backdrop-filter: blur(15px); border-bottom: 1px solid var(--border); }
+        nav { position: fixed; width: 100%; padding: 25px 8%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(1, 4, 9, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
         .logo { font-size: 1.6rem; font-weight: 800; color: var(--primary); letter-spacing: -1px; }
-        nav .links a { color: #fff; text-decoration: none; margin-left: 35px; font-weight: 600; font-size: 0.9rem; transition: 0.3s; opacity: 0.7; }
-        nav .links a:hover { opacity: 1; color: var(--primary); }
+        .nav-links a { color: #fff; text-decoration: none; margin-left: 35px; font-weight: 600; font-size: 0.9rem; opacity: 0.7; transition: 0.4s; }
+        .nav-links a:hover { opacity: 1; color: var(--primary); }
 
         /* Hero Section */
         .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 10%; position: relative; }
-        .hero-blob { position: absolute; width: 400px; height: 400px; background: var(--secondary); filter: blur(120px); opacity: 0.15; z-index: -1; }
+        .hero-aura { position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, var(--secondary) 0%, transparent 70%); filter: blur(80px); opacity: 0.15; z-index: -1; }
         
-        .profile-wrap { position: relative; margin-bottom: 30px; }
-        .profile-img { width: 230px; height: 230px; border-radius: 50%; border: 5px solid var(--primary); object-fit: cover; box-shadow: 0 0 50px var(--glow); animation: float 4s ease-in-out infinite; }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        .profile-container { position: relative; margin-bottom: 30px; }
+        .profile-img { width: 220px; height: 220px; border-radius: 50%; border: 5px solid var(--primary); object-fit: cover; box-shadow: 0 0 50px var(--glow); transition: 0.5s; }
+        .profile-img:hover { transform: scale(1.05) rotate(2deg); }
         
-        h1 { font-size: clamp(3.5rem, 10vw, 8rem); font-weight: 800; line-height: 0.85; margin-bottom: 20px; letter-spacing: -4px; }
-        .gradient-text { background: linear-gradient(90deg, #fff, var(--primary), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-size: 200% auto; animation: textShine 4s linear infinite; }
-        @keyframes textShine { to { background-position: 200% center; } }
+        h1 { font-size: clamp(3rem, 10vw, 6rem); font-weight: 800; line-height: 1; margin-bottom: 20px; letter-spacing: -3px; }
+        .shine-text { background: linear-gradient(90deg, #fff, var(--primary), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-size: 200% auto; animation: shine 4s linear infinite; }
+        @keyframes shine { to { background-position: 200% center; } }
 
-        /* Sections */
+        /* Section Styling */
         section { padding: 120px 10%; border-bottom: 1px solid var(--border); }
-        .section-tag { color: var(--primary); font-weight: 800; letter-spacing: 5px; text-transform: uppercase; font-size: 0.8rem; display: block; margin-bottom: 15px; }
-        .section-title { font-size: 3.5rem; font-weight: 800; margin-bottom: 60px; font-family: 'Space Grotesk', sans-serif; }
+        .tagline { color: var(--primary); font-weight: 800; letter-spacing: 4px; text-transform: uppercase; font-size: 0.75rem; display: block; margin-bottom: 15px; }
+        .title-large { font-size: 3.5rem; font-weight: 800; margin-bottom: 60px; font-family: 'Space Grotesk', sans-serif; }
 
-        /* Stats Grid */
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; margin-top: -60px; }
-        .stat-card { background: var(--glass); padding: 40px; border-radius: 30px; border: 1px solid var(--border); text-align: center; backdrop-filter: blur(10px); }
-        .stat-card h2 { font-size: 3.5rem; color: var(--primary); margin-bottom: 5px; }
+        /* Experience Cards */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        .card { background: var(--glass); padding: 50px; border-radius: 30px; border: 1px solid var(--border); transition: 0.5s; position: relative; overflow: hidden; }
+        .card:hover { border-color: var(--primary); transform: translateY(-10px); background: rgba(255,255,255,0.06); }
+        .card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 25px; display: block; }
+        .card h3 { font-size: 1.8rem; margin-bottom: 15px; }
 
-        /* Calculator Styles */
-        .calculator-box { max-width: 420px; margin: 0 auto; background: #0a0a0a; padding: 30px; border-radius: 35px; border: 2px solid var(--primary); box-shadow: 0 0 50px rgba(0, 242, 255, 0.15); }
-        #display { width: 100%; height: 75px; background: #000; color: var(--primary); border: none; border-radius: 20px; text-align: right; padding: 25px; font-size: 1.8rem; font-weight: 800; margin-bottom: 25px; }
-        .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
-        .btn-calc { padding: 22px; background: #1a1a1a; color: #fff; border: none; border-radius: 15px; font-size: 1.2rem; font-weight: 700; cursor: pointer; transition: 0.2s; }
-        .btn-calc:hover { background: var(--primary); color: #000; transform: scale(1.05); }
-        .btn-op { background: #252525; color: var(--primary); }
+        /* Innovation Lab (Calculator) */
+        .lab-container { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .calculator-pro { background: #080808; padding: 35px; border-radius: 40px; border: 2px solid var(--primary); box-shadow: 0 0 60px rgba(0, 242, 255, 0.1); }
+        #calc-display { width: 100%; height: 80px; background: #000; color: var(--primary); border: none; border-radius: 20px; text-align: right; padding: 25px; font-size: 2rem; font-weight: 700; margin-bottom: 25px; }
+        .key-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+        .key { padding: 22px; background: #151515; color: #fff; border: none; border-radius: 18px; font-size: 1.2rem; font-weight: 700; cursor: pointer; transition: 0.3s; }
+        .key:hover { background: var(--primary); color: #000; }
+        .key-op { background: #222; color: var(--primary); }
 
-        /* Experience Timeline */
-        .timeline { position: relative; border-left: 2px solid var(--primary); padding-left: 50px; margin-left: 20px; }
-        .time-item { position: relative; margin-bottom: 80px; }
-        .time-item::before { content: ''; position: absolute; width: 18px; height: 18px; background: var(--primary); left: -60px; top: 10px; border-radius: 50%; box-shadow: 0 0 15px var(--primary); }
-        .time-item h3 { font-size: 1.8rem; margin-bottom: 10px; }
-        .time-item span { color: var(--primary); font-weight: 800; font-size: 0.9rem; margin-bottom: 15px; display: block; }
+        /* Timeline */
+        .roadmap { position: relative; border-left: 2px solid var(--primary); padding-left: 40px; margin-left: 20px; }
+        .node { position: relative; margin-bottom: 60px; }
+        .node::before { content: ''; position: absolute; width: 16px; height: 16px; background: var(--bg-dark); border: 3px solid var(--primary); left: -50px; top: 10px; border-radius: 50%; }
+        .node span { color: var(--primary); font-weight: 800; font-size: 0.9rem; }
 
-        /* Skill Bars */
-        .skill-item { margin-bottom: 40px; }
-        .skill-label { display: flex; justify-content: space-between; margin-bottom: 12px; font-weight: 700; font-size: 1.1rem; }
-        .bar-bg { width: 100%; height: 14px; background: #111; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); }
-        .bar-fill { height: 100%; background: linear-gradient(90deg, var(--secondary), var(--primary)); border-radius: 20px; box-shadow: 0 0 20px var(--glow); }
+        /* Footer */
+        footer { padding: 80px 10%; text-align: center; }
+        .social-box { margin-bottom: 40px; }
+        .social-box a { color: #fff; font-size: 2.2rem; margin: 0 25px; transition: 0.4s; text-decoration: none; display: inline-block; }
+        .social-box a:hover { color: var(--primary); transform: scale(1.2); }
+        .footer-text { opacity: 0.4; font-size: 0.85rem; letter-spacing: 2px; }
 
-        /* Contact Box */
-        .contact-cta { background: linear-gradient(135deg, rgba(0, 97, 255, 0.1), rgba(0, 242, 255, 0.1)); padding: 100px 50px; border-radius: 50px; text-align: center; border: 1px solid var(--border-glow); }
-        .btn-main { padding: 22px 60px; background: #fff; color: #000; text-decoration: none; border-radius: 100px; font-weight: 800; font-size: 1.2rem; transition: 0.3s; display: inline-block; margin-top: 40px; }
-        .btn-main:hover { background: var(--primary); transform: translateY(-5px); box-shadow: 0 15px 40px var(--glow); }
-
-        footer { padding: 80px 10%; text-align: center; opacity: 0.5; font-size: 0.9rem; }
-
-        @media (max-width: 768px) {
-            nav { padding: 20px 5%; }
-            nav .links { display: none; }
-            section { padding: 80px 5%; }
+        @media (max-width: 1024px) {
+            .lab-container { grid-template-columns: 1fr; }
             h1 { font-size: 4rem; }
         }
     </style>
@@ -100,218 +89,152 @@
 
     <nav>
         <div class="logo">PRASUN JAIN.</div>
-        <div class="links">
-            <a href="#about">Philosophy</a>
-            <a href="#tools">Inventions</a>
-            <a href="#skills">Expertise</a>
-            <a href="#journey">Timeline</a>
-            <a href="#contact">Contact</a>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#lab">Innovation</a>
+            <a href="#history">Timeline</a>
+            <a href="#connect">Connect</a>
         </div>
     </nav>
 
     <section class="hero">
-        <div class="hero-blob"></div>
-        <div class="profile-wrap" data-aos="zoom-in">
+        <div class="hero-aura"></div>
+        <div class="profile-container" data-aos="zoom-in">
             <img src="prasun.jpg" alt="Prasun Jain" class="profile-img">
         </div>
         <div data-aos="fade-up">
-            <span class="section-tag">AI Architect & Business Visionary</span>
-            <h1><span class="gradient-text">PRASUN JAIN</span></h1>
-            <p style="max-width: 850px; margin: 0 auto; font-size: 1.4rem; color: #888;">
-                Integrating 5+ years of real-world business intelligence with autonomous AI orchestration. 
-                Perfect 100/100 CS logic. Currently scaling innovation at Parul University.
+            <span class="tagline">Technology meets Business</span>
+            <h1><span class="shine-text">PRASUN JAIN</span></h1>
+            <p style="max-width: 800px; color: #999; font-size: 1.3rem;">
+                Bridging the gap between high-volume retail operations and autonomous AI logic. 
+                Perfect 100/100 CS Score holder and BCA Scholar at Parul University.
             </p>
         </div>
     </section>
-
-    <div class="stats-grid" style="padding: 0 10%;">
-        <div class="stat-card" data-aos="fade-up">
-            <h2>5+</h2>
-            <p>Years Business Ops</p>
-        </div>
-        <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
-            <h2>100/100</h2>
-            <p>CS Perfection Score</p>
-        </div>
-        <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
-            <h2>BCA</h2>
-            <p>Academic Excellence</p>
-        </div>
-    </div>
 
     <section id="about">
-        <span class="section-tag">Professional Creed</span>
-        <h2 class="section-title">The Fusion of <br>Retail & Algorithms.</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
-            <div class="stat-card" data-tilt data-aos="fade-right" style="text-align: left;">
-                <i class="fas fa-brain" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 20px;"></i>
-                <h3>AI Agent Systems</h3>
-                <p>Developing end-to-end RAG pipelines and autonomous chatbots that act as 24/7 sales engines for traditional enterprises.</p>
+        <span class="tagline">Key Competencies</span>
+        <h2 class="title-large">Strategic Foundation.</h2>
+        <div class="grid">
+            <div class="card" data-aos="fade-up">
+                <i class="fas fa-briefcase"></i>
+                <h3>5+ Years Leadership</h3>
+                <p>Extensive experience in managing complex retail supply chains and customer credit lifecycles.</p>
             </div>
-            <div class="stat-card" data-tilt data-aos="fade-left" style="text-align: left;">
-                <i class="fas fa-chart-line" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 20px;"></i>
-                <h3>Strategic Business</h3>
-                <p>Hands-on mastery of inventory lifecycle, credit management, and consumer psychology derived from 5+ years of retail leadership.</p>
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-code"></i>
+                <h3>Algorithmic Logic</h3>
+                <p>Validated by a perfect 100/100 score in Computer Science board examinations.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="400">
+                <i class="fas fa-robot"></i>
+                <h3>AI Architect</h3>
+                <p>Specializing in RAG-based autonomous agents for business workflow automation.</p>
             </div>
         </div>
     </section>
 
-    <section id="tools" style="background: rgba(255,255,255,0.01);">
-        <span class="section-tag">Invention Lab</span>
-        <h2 class="section-title">Tool #01: Smart Logic <br>Calculator.</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 60px; align-items: center;">
+    <section id="lab">
+        <span class="tagline">Development Lab</span>
+        <h2 class="title-large">Project #01: Digital Logic <br>Controller.</h2>
+        <div class="lab-container">
             <div data-aos="fade-right">
-                <p style="font-size: 1.2rem; color: #ccc; margin-bottom: 30px;">
-                    This isn't just a UI component. It's a testament to the algorithmic logic that earned me a 100/100 in Computer Science. 
-                    Building foundational tools ensures that my AI models are backed by robust mathematical precision.
+                <p style="font-size: 1.2rem; color: #bbb; margin-bottom: 30px;">
+                    This interactive tool demonstrates pure JavaScript logic. As a developer with 100/100 CS marks, 
+                    I focus on precision, whether it's building simple tools or complex AI architectures.
                 </p>
-                <div style="padding: 20px; border-left: 4px solid var(--primary); background: var(--glass);">
-                    <p><strong>Code Logic:</strong> Evaluated using pure JavaScript event handling and real-time computation.</p>
-                </div>
+                <ul style="list-style: none; color: var(--primary); font-weight: 600;">
+                    <li style="margin-bottom: 10px;"><i class="fas fa-check-circle"></i> Pure JS Engine</li>
+                    <li style="margin-bottom: 10px;"><i class="fas fa-check-circle"></i> Zero Latency Calculation</li>
+                    <li><i class="fas fa-check-circle"></i> Responsive Logic UI</li>
+                </ul>
             </div>
-            <div class="calculator-box" data-aos="zoom-in">
-                <input type="text" id="display" disabled placeholder="0">
-                <div class="calc-grid">
-                    <button class="btn-calc btn-op" onclick="clearDisplay()">AC</button>
-                    <button class="btn-calc btn-op" onclick="deleteLast()">DEL</button>
-                    <button class="btn-calc btn-op" onclick="appendToDisplay('/')">/</button>
-                    <button class="btn-calc btn-op" onclick="appendToDisplay('*')">×</button>
+            <div class="calculator-pro" data-aos="zoom-in">
+                <input type="text" id="calc-display" disabled placeholder="0">
+                <div class="key-grid">
+                    <button class="key key-op" onclick="clr()">AC</button>
+                    <button class="key key-op" onclick="del()">DEL</button>
+                    <button class="key key-op" onclick="add('/')">÷</button>
+                    <button class="key key-op" onclick="add('*')">×</button>
                     
-                    <button class="btn-calc" onclick="appendToDisplay('7')">7</button>
-                    <button class="btn-calc" onclick="appendToDisplay('8')">8</button>
-                    <button class="btn-calc" onclick="appendToDisplay('9')">9</button>
-                    <button class="btn-calc btn-op" onclick="appendToDisplay('-')">-</button>
+                    <button class="key" onclick="add('7')">7</button>
+                    <button class="key" onclick="add('8')">8</button>
+                    <button class="key" onclick="add('9')">9</button>
+                    <button class="key key-op" onclick="add('-')">−</button>
                     
-                    <button class="btn-calc" onclick="appendToDisplay('4')">4</button>
-                    <button class="btn-calc" onclick="appendToDisplay('5')">5</button>
-                    <button class="btn-calc" onclick="appendToDisplay('6')">6</button>
-                    <button class="btn-calc btn-op" onclick="appendToDisplay('+')">+</button>
+                    <button class="key" onclick="add('4')">4</button>
+                    <button class="key" onclick="add('5')">5</button>
+                    <button class="key" onclick="add('6')">6</button>
+                    <button class="key key-op" onclick="add('+')">+</button>
                     
-                    <button class="btn-calc" onclick="appendToDisplay('1')">1</button>
-                    <button class="btn-calc" onclick="appendToDisplay('2')">2</button>
-                    <button class="btn-calc" onclick="appendToDisplay('3')">3</button>
-                    <button class="btn-calc btn-op" style="background: var(--primary); color: #000;" onclick="calculate()">=</button>
+                    <button class="key" onclick="add('1')">1</button>
+                    <button class="key" onclick="add('2')">2</button>
+                    <button class="key" onclick="add('3')">3</button>
+                    <button class="key" style="background: var(--primary); color: #000;" onclick="sol()">=</button>
                     
-                    <button class="btn-calc" style="grid-column: span 2;" onclick="appendToDisplay('0')">0</button>
-                    <button class="btn-calc" onclick="appendToDisplay('.')">.</button>
+                    <button class="key" style="grid-column: span 2;" onclick="add('0')">0</button>
+                    <button class="key" onclick="add('.')">.</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="skills">
-        <span class="section-tag">Competency Matrix</span>
-        <h2 class="section-title">Technological & <br>Business Depth.</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 60px;">
-            <div data-aos="fade-up">
-                <h3>Technical Proficiencies</h3>
-                <br>
-                <div class="skill-item">
-                    <div class="skill-label"><span>AI Automation & Agent Training</span><span>95%</span></div>
-                    <div class="bar-bg"><div class="bar-fill" style="width: 95%;"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-label"><span>Software Engineering (Java/Python)</span><span>100%</span></div>
-                    <div class="bar-bg"><div class="bar-fill" style="width: 100%;"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-label"><span>Frontend Orchestration (HTML/CSS/JS)</span><span>88%</span></div>
-                    <div class="bar-bg"><div class="bar-fill" style="width: 88%;"></div></div>
-                </div>
+    <section id="history">
+        <span class="tagline">Timeline</span>
+        <h2 class="title-large">Evolution of Skill.</h2>
+        <div class="roadmap">
+            <div class="node" data-aos="fade-left">
+                <span>2019 - PRESENT</span>
+                <h3>Strategic Head | Retail Management</h3>
+                <p style="opacity: 0.6;">Managing end-to-end operations and procurement for large-scale retail enterprise.</p>
             </div>
-            <div data-aos="fade-up" data-aos-delay="200">
-                <h3>Business Strategics</h3>
-                <br>
-                <div class="skill-item">
-                    <div class="skill-label"><span>Supply Chain & Inventory Management</span><span>92%</span></div>
-                    <div class="bar-bg"><div class="bar-fill" style="width: 92%;"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-label"><span>Customer CRM & Relationship Logic</span><span>96%</span></div>
-                    <div class="bar-bg"><div class="bar-fill" style="width: 96%;"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-label"><span>Credit Cycle & Financial Operations</span><span>90%</span></div>
-                    <div class="bar-bg"><div class="bar-fill" style="width: 90%;"></div></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="journey" style="background: #000;">
-        <span class="section-tag">Chronology</span>
-        <h2 class="section-title">The Career Pathway.</h2>
-        <div class="timeline">
-            <div class="time-item" data-aos="fade-left">
-                <span>2019 — ONGOING</span>
-                <h3>Business Lead | Retail Management</h3>
-                <p>Directly spearheading operations for a prominent retail enterprise. Expertly managing credit lifecycles and high-stakes vendor negotiations.</p>
-            </div>
-            <div class="time-item" data-aos="fade-left" data-aos-delay="100">
+            <div class="node" data-aos="fade-left">
                 <span>ACADEMIC MILESTONE</span>
-                <h3>National Perfection Record</h3>
-                <p>Secured a perfect 100/100 score in Computer Science, setting a benchmark for logic-driven problem-solving.</p>
+                <h3>CS Perfection Award</h3>
+                <p style="opacity: 0.6;">Achieved 100/100 marks in Computer Science, solidifying algorithmic foundation.</p>
             </div>
-            <div class="time-item" data-aos="fade-left" data-aos-delay="200">
-                <span>CURRENT CHAPTER</span>
+            <div class="node" data-aos="fade-left">
+                <span>PRESENT</span>
                 <h3>BCA Scholar | Parul University</h3>
-                <p>Scaling professional knowledge in software development, cloud architecture, and next-generation AI agents.</p>
-            </div>
-            <div class="time-item" data-aos="fade-left" data-aos-delay="300">
-                <span>THE FUTURE</span>
-                <h3>AI System Automator</h3>
-                <p>Dedicated to transforming traditional SMBs into AI-driven powerhouses through custom neural network deployments.</p>
+                <p style="opacity: 0.6;">Deepening technical expertise in modern software engineering and AI deployment.</p>
             </div>
         </div>
     </section>
 
-    <section id="contact">
-        <div class="contact-cta" data-aos="zoom-out">
-            <h2 style="font-size: 3.5rem; margin-bottom: 25px;">Let's Build the Autonomous Future.</h2>
-            <p style="font-size: 1.2rem; opacity: 0.7; max-width: 700px; margin: 0 auto;">
-                Currently accepting inquiries for high-level AI automation consulting and strategic business software partnerships.
-            </p>
-            <a href="mailto:PRASUNJAIN006@GMAIL.COM" class="btn-main">Connect via Email</a>
-            <div style="margin-top: 50px; font-weight: 600; opacity: 0.8;">
-                <p>Email: PRASUNJAIN006@GMAIL.COM</p>
-                <p>WhatsApp: +91-8824937013</p>
+    <section id="connect" style="background: rgba(0,242,255,0.02);">
+        <div style="text-align: center;" data-aos="zoom-out">
+            <h2 style="font-size: 3rem; margin-bottom: 20px;">Let's Build Something Great.</h2>
+            <p style="color: #888; margin-bottom: 50px;">Available for AI consultation, Business Automation, and Technical Leadership.</p>
+            
+            <div class="social-box">
+                <a href="https://www.linkedin.com/in/prasun-jain-419105368" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/prasunjain006" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://wa.me/918824937013" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="mailto:PRASUNJAIN006@GMAIL.COM"><i class="fas fa-envelope"></i></a>
             </div>
+            
+            <p style="font-weight: 700; color: var(--primary);">Email: PRASUNJAIN006@GMAIL.COM</p>
         </div>
     </section>
 
-  <footer style="padding: 80px 10%; border-top: 1px solid rgba(255,255,255,0.05); text-align: center;">
-    <div style="margin-bottom: 30px; font-size: 1.8rem;">
-        <a href="https://www.linkedin.com/in/prasun-jain-419105368" target="_blank" style="color: #fff; margin: 0 20px; text-decoration: none;">
-            <i class="fab fa-linkedin"></i>
-        </a>
-        <a href="https://github.com/prasunjain006" target="_blank" style="color: #fff; margin: 0 20px;">
-            <i class="fab fa-github"></i>
-        </a>
-        <a href="#" style="color: #fff; margin: 0 20px;">
-            <i class="fab fa-instagram"></i>
-        </a>
-    </div>
-    <p style="opacity: 0.3; font-size: 0.8rem;">© 2026 PRASUN JAIN ARCHIVES. ALL RIGHTS RESERVED.</p>
-</footer>
-
-    <script>
-        function appendToDisplay(value) { document.getElementById('display').value += value; }
-        function clearDisplay() { document.getElementById('display').value = ''; }
-        function deleteLast() { let current = document.getElementById('display').value; document.getElementById('display').value = current.slice(0, -1); }
-        function calculate() { try { document.getElementById('display').value = eval(document.getElementById('display').value); } catch (e) { document.getElementById('display').value = 'Error'; } }
-    </script>
+    <footer>
+        <p class="footer-text">© 2026 PRASUN JAIN ARCHIVES. DESIGNED WITH LOGIC. </p>
+    </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 1200, once: true });
-        VanillaTilt.init(document.querySelectorAll(".stat-card"), { max: 15, speed: 400, glare: true, "max-glare": 0.3 });
+        AOS.init({ duration: 1000, once: true });
+
+        const d = document.getElementById('calc-display');
+        function add(v) { d.value += v; }
+        function clr() { d.value = ''; }
+        function del() { d.value = d.value.slice(0, -1); }
+        function sol() { try { d.value = eval(d.value); } catch(e) { d.value = 'Error'; } }
     </script>
     
     <script>
     (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="pGyU9d7icymw-RX_dqLbT";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
     </script>
+
 </body>
-
 </html>
-
-
