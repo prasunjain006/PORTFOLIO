@@ -3,9 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prasun Jain | Portfolio</title>
+    <title>Prasun Jain | Portfolio & 30-Day Sprint</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Modern CSS Variables for easy customization */
+        :root {
+            --primary: #00d2ff;
+            --secondary: #3a7bd5;
+            --bg-dark: #0f172a;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-light: #f8fafc;
+            --accent: #ff4d4d;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-light); line-height: 1.6; overflow-x: hidden; }
+
+        /* Smooth Scrolling */
+        html { scroll-behavior: smooth; }
+
+        /* Glassmorphism Nav */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 1.5rem 10%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .logo { font-size: 1.5rem; font-weight: bold; letter-spacing: 2px; }
+        .logo span { color: var(--primary); }
+        .nav-links { list-style: none; display: flex; gap: 2rem; }
+        .nav-links a { color: white; text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* Hero Section with Animation */
+        .hero {
+            height: 100vh; display: flex; align-items: center; justify-content: center;
+            text-align: center; background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+            padding-top: 80px;
+        }
+        .profile-frame {
+            width: 180px; height: 180px; border-radius: 50%; border: 4px solid var(--primary);
+            margin: 0 auto 1.5rem; overflow: hidden; box-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
+        }
+        .profile-frame img { width: 100%; height: 100%; object-fit: cover; }
+        h1 { font-size: 3.5rem; margin-bottom: 0.5rem; background: linear-gradient(to right, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { font-size: 1.2rem; color: #94a3b8; margin-bottom: 2rem; }
+
+        /* Buttons */
+        .cta-btns { display: flex; gap: 1rem; justify-content: center; }
+        .btn { padding: 0.8rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 600; transition: 0.4s; }
+        .primary { background: linear-gradient(45deg, var(--primary), var(--secondary)); color: white; }
+        .secondary { border: 1px solid var(--primary); color: var(--primary); }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0, 210, 255, 0.4); }
+
+        /* 30-Day Challenge Section */
+        .challenge-section { padding: 5rem 10%; background: #111827; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; position: relative; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: var(--primary); margin: 10px auto; }
+        
+        .challenge-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem;
+        }
+        .day-card {
+            background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1);
+            padding: 1.5rem; border-radius: 12px; text-align: center; transition: 0.3s;
+            position: relative; overflow: hidden;
+        }
+        .day-card.active { border-color: var(--primary); background: rgba(0, 210, 255, 0.1); }
+        .day-card.locked { opacity: 0.5; filter: grayscale(1); }
+        .day-card h4 { font-size: 0.8rem; color: var(--primary); margin-bottom: 5px; }
+        .day-card p { font-size: 0.9rem; font-weight: 500; }
+        .day-card:hover { transform: scale(1.05); background: rgba(255,255,255,0.08); }
+
+        /* Experience & Projects cards */
+        .container { padding: 5rem 10%; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .card { 
+            background: var(--card-bg); padding: 2rem; border-radius: 20px; 
+            border: 1px solid rgba(255,255,255,0.1); transition: 0.3s;
+        }
+        .card:hover { background: rgba(255,255,255,0.08); border-color: var(--primary); }
+
+        footer { text-align: center; padding: 2rem; background: #070b14; border-top: 1px solid rgba(255,255,255,0.1); color: #64748b; }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .nav-links { display: none; } /* Mobile simplicity */
+        }
+    </style>
 </head>
 <body>
 
@@ -13,8 +98,8 @@
         <div class="logo">PRASUN<span>JAIN</span></div>
         <ul class="nav-links">
             <li><a href="#about">About</a></li>
+            <li><a href="#challenge">30-Day Challenge</a></li>
             <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
@@ -25,84 +110,79 @@
                 <img src="prasun.jpeg" alt="Prasun Jain">
             </div>
             <h1>Prasun Jain</h1>
-            <p class="subtitle">BCA Student @ Parul University | Business Manager | AI Developer</p>
+            <p class="subtitle">BCA Student | AI Developer | Business Manager</p>
             <div class="cta-btns">
                 <a href="https://wa.me/918824937013" class="btn primary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                <a href="https://www.linkedin.com/in/prasunjain06" target="_blank" class="btn secondary"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                <a href="#challenge" class="btn secondary">View Challenge</a>
             </div>
+        </div>
+    </section>
+
+    <section id="challenge" class="challenge-section">
+        <h2 class="section-title">30 Days, 30 Projects</h2>
+        <p style="text-align: center; margin-bottom: 2rem; color: #94a3b8;">Building the future, one day at a time.</p>
+        <div class="challenge-grid">
+            <div class="day-card active">
+                <h4>Day 01</h4>
+                <p>Modern Portfolio</p>
+                <small style="color: var(--primary);">Live</small>
+            </div>
+            
+            <script>
+                const grid = document.querySelector('.challenge-grid');
+                for(let i=2; i<=30; i++) {
+                    grid.innerHTML += `
+                        <div class="day-card locked">
+                            <h4>Day ${i < 10 ? '0'+i : i}</h4>
+                            <p>Upcoming...</p>
+                        </div>
+                    `;
+                }
+            </script>
         </div>
     </section>
 
     <section id="about" class="container">
         <div class="grid">
             <div class="card">
-                <h3><i class="fas fa-graduation-cap"></i> Education</h3>
-                <ul>
-                    <li><strong>BCA</strong>, Parul University (2025-2028)</li>
-                    <li><strong>12th Grade</strong>, Birla International School</li>
-                    <li>Score: 80.40% (<strong>100/100 in Computer Science</strong>)</li>
-                </ul>
+                <h3 style="color: var(--primary); margin-bottom: 1rem;"><i class="fas fa-graduation-cap"></i> Education</h3>
+                <p><strong>BCA</strong>, Parul University (2025-2028)</p>
+                <p><strong>12th Grade</strong>, Birla International School (80.40%)</p>
+                <p style="color: var(--primary); font-weight: bold; margin-top: 10px;">100/100 in Computer Science</p>
             </div>
             <div class="card">
-                <h3><i class="fas fa-bullseye"></i> Objective</h3>
-                <p>BCA student aiming to leverage technical skills in AI and leadership experience in a professional tech environment.</p>
+                <h3 style="color: var(--primary); margin-bottom: 1rem;"><i class="fas fa-code"></i> Technical Arsenal</h3>
+                <p>C, C++, HTML, Java, Prompt Engineering, Generative AI, Advanced Excel.</p>
+                <p style="margin-top: 10px; font-style: italic; color: #94a3b8;">Expert Level Marwari Speaker</p>
             </div>
         </div>
     </section>
 
-    <section id="experience" class="bg-alt">
-        <div class="container">
-            <h2 class="section-title">Experience & Leadership</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <h4>Owner & Manager | Shah Pratapmal Champalal</h4>
-                    <span class="date">2021 - Present</span>
-                    <p>Managing retail business operations and customer relations for over 5 years.</p>
-                </div>
-                <div class="timeline-item">
-                    <h4>Administrator | BCA Student Community</h4>
-                    <span class="date">2025 - Present</span>
-                    <p>Leading a group of 100+ members, coordinating communication and activities.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects" class="container">
-        <h2 class="section-title">Projects & Expertise</h2>
+    <section id="experience" class="container" style="background: #0f172a;">
+        <h2 class="section-title">Leadership</h2>
         <div class="grid">
-            <div class="card highlight-card">
-                <h4>Code-Buddy</h4>
-                <p>AI tutor using Gemini API to explain coding in <strong>Hindi and Marwari</strong>.</p>
+            <div class="card">
+                <h4>Shah Pratapmal Champalal</h4>
+                <span style="color: var(--primary); font-size: 0.9rem;">2021 - Present | Owner</span>
+                <p style="margin-top: 1rem;">Managing retail clothing operations and customer relations for 5+ years.</p>
             </div>
             <div class="card">
-                <h4>Technical Arsenal</h4>
-                <p>C, C++, HTML, Java, Prompt Engineering, Generative AI, and Advanced Excel.</p>
-            </div>
-            <div class="card">
-                <h4>Linguistic Mastery</h4>
-                <p>English, Hindi, and <strong>Expert Level Marwari</strong>.</p>
+                <h4>Code-Buddy (Project)</h4>
+                <span style="color: var(--primary); font-size: 0.9rem;">Founder</span>
+                <p style="margin-top: 1rem;">AI tutor using Gemini API explaining code in Hindi & Marwari.</p>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="bg-alt text-center">
-        <div class="container">
-            <h2 class="section-title">Connect with Me</h2>
-            <p><i class="fas fa-envelope"></i> prasunjain006@gmail.com</p>
-            <p><i class="fas fa-phone"></i> +91 8824937013</p>
-            <p><i class="fas fa-map-marker-alt"></i> Sojat Road, Pali, Rajasthan</p>
-            <div class="social-icons" style="margin-top:20px;">
-                <span><i class="fas fa-tint" style="color:#ff4d4d;"></i> Blood Donor</span> | 
-                <span><i class="fas fa-award" style="color:#ffd700;"></i> Mr. Farewell</span>
-            </div>
+    <footer id="contact">
+        <p><i class="fas fa-map-marker-alt"></i> Sojat Road, Pali, Rajasthan</p>
+        <p style="margin: 10px 0;">prasunjain006@gmail.com | +91 8824937013</p>
+        <div style="margin-top: 20px;">
+            <span><i class="fas fa-tint" style="color:var(--accent);"></i> Blood Donor</span> | 
+            <span><i class="fas fa-award" style="color:gold;"></i> Mr. Farewell</span>
         </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2026 Prasun Jain | Professional Portfolio</p>
+        <p style="margin-top: 30px; font-size: 0.8rem;">&copy; 2026 Prasun Jain | 30-Day Coding Sprint</p>
     </footer>
 
 </body>
 </html>
-
