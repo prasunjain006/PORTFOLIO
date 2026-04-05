@@ -3,138 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prasun Jain | Portfolio & 30-Day Sprint</title>
+    <title>PRASUN JAIN | THE VISIONARY ARCHITECT</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Modern CSS Variables for easy customization */
+        @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;600;800&display=swap');
+
         :root {
-            --primary: #00d2ff;
-            --secondary: #3a7bd5;
-            --bg-dark: #0f172a;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --text-light: #f8fafc;
-            --accent: #ff4d4d;
+            --bg: #000000;
+            --accent: #00f2ff;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+            --text-dim: #a1a1a1;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: var(--bg-dark); color: var(--text-light); line-height: 1.6; overflow-x: hidden; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: var(--bg); 
+            color: #fff; 
+            font-family: 'Inter', sans-serif; 
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-        /* Smooth Scrolling */
-        html { scroll-behavior: smooth; }
+        /* High-End Background Animation */
+        .orb {
+            position: fixed; width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(0, 242, 255, 0.05) 0%, transparent 70%);
+            border-radius: 50%; z-index: -1; animation: float 20s infinite alternate;
+        }
 
-        /* Glassmorphism Nav */
+        @keyframes float {
+            from { transform: translate(-10%, -10%); }
+            to { transform: translate(20%, 20%); }
+        }
+
+        /* Navigation */
         nav {
-            position: fixed; top: 0; width: 100%; padding: 1.5rem 10%;
+            position: fixed; width: 100%; padding: 2rem 5%;
             display: flex; justify-content: space-between; align-items: center;
-            background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); z-index: 1000;
         }
-        .logo { font-size: 1.5rem; font-weight: bold; letter-spacing: 2px; }
-        .logo span { color: var(--primary); }
-        .nav-links { list-style: none; display: flex; gap: 2rem; }
-        .nav-links a { color: white; text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
-        .nav-links a:hover { color: var(--primary); }
-
-        /* Hero Section with Animation */
-        .hero {
-            height: 100vh; display: flex; align-items: center; justify-content: center;
-            text-align: center; background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
-            padding-top: 80px;
-        }
-        .profile-frame {
-            width: 180px; height: 180px; border-radius: 50%; border: 4px solid var(--primary);
-            margin: 0 auto 1.5rem; overflow: hidden; box-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
-        }
-        .profile-frame img { width: 100%; height: 100%; object-fit: cover; }
-        h1 { font-size: 3.5rem; margin-bottom: 0.5rem; background: linear-gradient(to right, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .subtitle { font-size: 1.2rem; color: #94a3b8; margin-bottom: 2rem; }
-
-        /* Buttons */
-        .cta-btns { display: flex; gap: 1rem; justify-content: center; }
-        .btn { padding: 0.8rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 600; transition: 0.4s; }
-        .primary { background: linear-gradient(45deg, var(--primary), var(--secondary)); color: white; }
-        .secondary { border: 1px solid var(--primary); color: var(--primary); }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0, 210, 255, 0.4); }
-
-        /* 30-Day Challenge Section */
-        .challenge-section { padding: 5rem 10%; background: #111827; }
-        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; position: relative; }
-        .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: var(--primary); margin: 10px auto; }
+        .nav-brand { font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 1.2rem; letter-spacing: 5px; color: var(--accent); }
         
-        .challenge-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem;
+        /* Hero Section */
+        .hero {
+            min-height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: flex-start; padding: 0 10%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0), #050505);
         }
-        .day-card {
-            background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1);
-            padding: 1.5rem; border-radius: 12px; text-align: center; transition: 0.3s;
+        .hero span { color: var(--accent); font-weight: 800; letter-spacing: 3px; font-size: 0.9rem; text-transform: uppercase; }
+        .hero h1 { font-size: clamp(3rem, 10vw, 7rem); font-family: 'Syncopate', sans-serif; line-height: 1; margin: 20px 0; }
+        .hero p { max-width: 600px; color: var(--text-dim); font-size: 1.2rem; margin-bottom: 40px; }
+
+        /* Experience Timeline */
+        .section { padding: 100px 10%; }
+        .section-title { font-family: 'Syncopate', sans-serif; font-size: 2rem; margin-bottom: 50px; border-left: 5px solid var(--accent); padding-left: 20px; }
+
+        .experience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .glass-card {
+            background: var(--glass); border: 1px solid var(--border);
+            padding: 40px; border-radius: 30px; transition: 0.4s;
             position: relative; overflow: hidden;
         }
-        .day-card.active { border-color: var(--primary); background: rgba(0, 210, 255, 0.1); }
-        .day-card.locked { opacity: 0.5; filter: grayscale(1); }
-        .day-card h4 { font-size: 0.8rem; color: var(--primary); margin-bottom: 5px; }
-        .day-card p { font-size: 0.9rem; font-weight: 500; }
-        .day-card:hover { transform: scale(1.05); background: rgba(255,255,255,0.08); }
+        .glass-card:hover { border-color: var(--accent); background: rgba(255,255,255,0.05); transform: translateY(-5px); }
+        .glass-card h3 { font-size: 1.5rem; margin-bottom: 10px; color: var(--accent); }
+        .glass-card .meta { font-size: 0.8rem; font-weight: 800; color: #555; text-transform: uppercase; margin-bottom: 20px; display: block; }
 
-        /* Experience & Projects cards */
-        .container { padding: 5rem 10%; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .card { 
-            background: var(--card-bg); padding: 2rem; border-radius: 20px; 
-            border: 1px solid rgba(255,255,255,0.1); transition: 0.3s;
+        /* Skill Bars */
+        .skill-container { margin-top: 30px; }
+        .skill-row { margin-bottom: 15px; }
+        .skill-name { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 5px; }
+        .skill-bar { height: 6px; background: #222; border-radius: 10px; overflow: hidden; }
+        .skill-progress { height: 100%; background: var(--accent); border-radius: 10px; }
+
+        /* The 30-Day Sprint Dashboard */
+        .sprint-dashboard {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 15px;
         }
-        .card:hover { background: rgba(255,255,255,0.08); border-color: var(--primary); }
+        .day-box {
+            aspect-ratio: 1/1; background: #0a0a0a; border: 1px solid #1a1a1a;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            border-radius: 15px; transition: 0.3s; cursor: pointer;
+        }
+        .day-box.active { border-color: var(--accent); box-shadow: 0 0 20px rgba(0, 242, 255, 0.2); }
+        .day-box.active i { color: var(--accent); }
+        .day-box span { font-size: 0.7rem; color: #444; margin-top: 5px; font-weight: 800; }
+        .day-box:hover { background: #111; }
 
-        footer { text-align: center; padding: 2rem; background: #070b14; border-top: 1px solid rgba(255,255,255,0.1); color: #64748b; }
+        /* Achievements Floating Tags */
+        .tags { display: flex; wrap: wrap; gap: 10px; margin-top: 20px; }
+        .tag { padding: 5px 15px; border-radius: 50px; border: 1px solid var(--border); font-size: 0.8rem; color: var(--text-dim); }
 
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .nav-links { display: none; } /* Mobile simplicity */
+        /* Contact FAB */
+        .contact-btn {
+            position: fixed; bottom: 40px; right: 40px;
+            background: var(--accent); color: #000; padding: 20px 40px;
+            border-radius: 50px; font-weight: 800; text-decoration: none;
+            box-shadow: 0 10px 40px rgba(0, 242, 255, 0.4);
+            display: flex; align-items: center; gap: 10px; transition: 0.3s;
+            z-index: 999;
+        }
+        .contact-btn:hover { transform: scale(1.05); }
+
+        @media (max-width: 900px) {
+            .experience-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 4rem; }
         }
     </style>
 </head>
 <body>
+    <div class="orb"></div>
 
     <nav>
-        <div class="logo">PRASUN<span>JAIN</span></div>
-        <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#challenge">30-Day Challenge</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+        <div class="nav-brand">PRASUN JAIN</div>
+        <div style="font-size: 0.7rem; font-weight: 800; letter-spacing: 2px;">2025-2028 | BCA SPRINT</div>
     </nav>
 
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <div class="profile-frame">
-                <img src="prasun.jpeg" alt="Prasun Jain">
+    <section class="hero">
+        <span>Owner of Shah Pratapmal Champalal</span>
+        <h1>BUILD.<br>SCALE.<br>DOMINATE.</h1>
+        <p>Merging 5 years of business legacy with cutting-edge AI. Currently engineering 30 projects in 30 days while managing a 100+ member tech community.</p>
+        <div class="tags">
+            <div class="tag"><i class="fas fa-award"></i> 100/100 CS Score</div>
+            <div class="tag"><i class="fas fa-crown"></i> Mr. Farewell</div>
+            <div class="tag"><i class="fas fa-heart"></i> Blood Donor</div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">The Legacy & Logic</h2>
+        <div class="experience-grid">
+            <div class="glass-card">
+                <span class="meta">Since 2021 | Business Mastery</span>
+                <h3>Shah Pratapmal Champalal</h3>
+                <p>Leading a retail clothing business for 5 years. Mastering inventory management, customer psych, and cash flow before even starting college.</p>
+                <div class="tags" style="margin-top: 20px;">
+                    <div class="tag">Retail Ops</div>
+                    <div class="tag">Sales Strategy</div>
+                </div>
             </div>
-            <h1>Prasun Jain</h1>
-            <p class="subtitle">BCA Student | AI Developer | Business Manager</p>
-            <div class="cta-btns">
-                <a href="https://wa.me/918824937013" class="btn primary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                <a href="#challenge" class="btn secondary">View Challenge</a>
+
+            <div class="glass-card">
+                <span class="meta">Present | Leadership</span>
+                <h3>BCA Community Admin</h3>
+                <p>Commanding a group of 100+ students at Parul University. Coordinating technical resources and fostering a culture of rapid building.</p>
+                <div class="tags" style="margin-top: 20px;">
+                    <div class="tag">Team Management</div>
+                    <div class="tag">Community Growth</div>
+                </div>
+            </div>
+
+            <div class="glass-card">
+                <span class="meta">Project Alpha | AI</span>
+                <h3>Code-Buddy AI</h3>
+                <p>Engineered a custom AI tutor using Gemini API to explain complex coding concepts in <strong>Hindi & Marwari</strong>. Breaking language barriers in tech.</p>
+                <div class="skill-container">
+                    <div class="skill-row">
+                        <div class="skill-name"><span>Prompt Engineering</span><span>95%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 95%;"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card">
+                <span class="meta">Technical Arsenal</span>
+                <h3>The Skillset</h3>
+                <div class="skill-container">
+                    <div class="skill-row">
+                        <div class="skill-name"><span>C / C++ Mastery</span><span>90%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 90%;"></div></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-name"><span>Web (HTML/CSS/JS)</span><span>85%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 85%;"></div></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-name"><span>Advanced Excel</span><span>92%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 92%;"></div></div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="challenge" class="challenge-section">
-        <h2 class="section-title">30 Days, 30 Projects</h2>
-        <p style="text-align: center; margin-bottom: 2rem; color: #94a3b8;">Building the future, one day at a time.</p>
-        <div class="challenge-grid">
-            <div class="day-card active">
-                <h4>Day 01</h4>
-                <p>Modern Portfolio</p>
-                <small style="color: var(--primary);">Live</small>
+    <section class="section" id="challenge" style="background: #050505;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 50px;">
+            <h2 class="section-title" style="margin-bottom: 0;">The 30-Day Project Sprint</h2>
+            <div style="text-align: right;">
+                <h1 style="font-size: 4rem; color: var(--accent); margin: 0;">01</h1>
+                <span style="font-size: 0.7rem; font-weight: 800; color: #444;">PROJECTS LIVE</span>
             </div>
-            
+        </div>
+
+        <div class="sprint-dashboard" id="sprint-grid">
+            <div class="day-box active">
+                <i class="fas fa-rocket"></i>
+                <span>DAY 01</span>
+            </div>
             <script>
-                const grid = document.querySelector('.challenge-grid');
+                const grid = document.getElementById('sprint-grid');
                 for(let i=2; i<=30; i++) {
                     grid.innerHTML += `
-                        <div class="day-card locked">
-                            <h4>Day ${i < 10 ? '0'+i : i}</h4>
-                            <p>Upcoming...</p>
+                        <div class="day-box">
+                            <i class="fas fa-lock" style="font-size: 0.8rem; color: #222;"></i>
+                            <span>DAY ${i < 10 ? '0'+i : i}</span>
                         </div>
                     `;
                 }
@@ -142,47 +214,20 @@
         </div>
     </section>
 
-    <section id="about" class="container">
-        <div class="grid">
-            <div class="card">
-                <h3 style="color: var(--primary); margin-bottom: 1rem;"><i class="fas fa-graduation-cap"></i> Education</h3>
-                <p><strong>BCA</strong>, Parul University (2025-2028)</p>
-                <p><strong>12th Grade</strong>, Birla International School (80.40%)</p>
-                <p style="color: var(--primary); font-weight: bold; margin-top: 10px;">100/100 in Computer Science</p>
-            </div>
-            <div class="card">
-                <h3 style="color: var(--primary); margin-bottom: 1rem;"><i class="fas fa-code"></i> Technical Arsenal</h3>
-                <p>C, C++, HTML, Java, Prompt Engineering, Generative AI, Advanced Excel.</p>
-                <p style="margin-top: 10px; font-style: italic; color: #94a3b8;">Expert Level Marwari Speaker</p>
-            </div>
+    <section class="section">
+        <div class="glass-card" style="text-align: center; border: 2px dashed var(--accent);">
+            <h3>Expert Level Marwari Speaker</h3>
+            <p style="color: var(--text-dim); max-width: 600px; margin: 10px auto;">Connecting with the roots of Rajasthan while building the future of Silicon Valley. From Sojat Road to the Global Stage.</p>
         </div>
     </section>
 
-    <section id="experience" class="container" style="background: #0f172a;">
-        <h2 class="section-title">Leadership</h2>
-        <div class="grid">
-            <div class="card">
-                <h4>Shah Pratapmal Champalal</h4>
-                <span style="color: var(--primary); font-size: 0.9rem;">2021 - Present | Owner</span>
-                <p style="margin-top: 1rem;">Managing retail clothing operations and customer relations for 5+ years.</p>
-            </div>
-            <div class="card">
-                <h4>Code-Buddy (Project)</h4>
-                <span style="color: var(--primary); font-size: 0.9rem;">Founder</span>
-                <p style="margin-top: 1rem;">AI tutor using Gemini API explaining code in Hindi & Marwari.</p>
-            </div>
-        </div>
-    </section>
-
-    <footer id="contact">
-        <p><i class="fas fa-map-marker-alt"></i> Sojat Road, Pali, Rajasthan</p>
-        <p style="margin: 10px 0;">prasunjain006@gmail.com | +91 8824937013</p>
-        <div style="margin-top: 20px;">
-            <span><i class="fas fa-tint" style="color:var(--accent);"></i> Blood Donor</span> | 
-            <span><i class="fas fa-award" style="color:gold;"></i> Mr. Farewell</span>
-        </div>
-        <p style="margin-top: 30px; font-size: 0.8rem;">&copy; 2026 Prasun Jain | 30-Day Coding Sprint</p>
+    <footer style="padding: 100px 10%; text-align: center; border-top: 1px solid var(--border);">
+        <p style="color: #444; font-weight: 800; letter-spacing: 2px;">PRASUN JAIN &copy; 2026 | ALL RIGHTS RESERVED</p>
     </footer>
+
+    <a href="https://wa.me/918824937013" class="contact-btn">
+        <i class="fab fa-whatsapp"></i> CONNECT WITH PRASUN
+    </a>
 
 </body>
 </html>
