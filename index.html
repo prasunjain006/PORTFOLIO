@@ -25,7 +25,6 @@
             overflow-x: hidden;
         }
 
-        /* High-End Background Animation */
         .orb {
             position: fixed; width: 600px; height: 600px;
             background: radial-gradient(circle, rgba(0, 242, 255, 0.05) 0%, transparent 70%);
@@ -37,7 +36,6 @@
             to { transform: translate(20%, 20%); }
         }
 
-        /* Navigation */
         nav {
             position: fixed; width: 100%; padding: 2rem 5%;
             display: flex; justify-content: space-between; align-items: center;
@@ -45,7 +43,6 @@
         }
         .nav-brand { font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 1.2rem; letter-spacing: 5px; color: var(--accent); }
         
-        /* Hero Section */
         .hero {
             min-height: 100vh; display: flex; flex-direction: column;
             justify-content: center; align-items: flex-start; padding: 0 10%;
@@ -55,7 +52,6 @@
         .hero h1 { font-size: clamp(3rem, 10vw, 7rem); font-family: 'Syncopate', sans-serif; line-height: 1; margin: 20px 0; }
         .hero p { max-width: 600px; color: var(--text-dim); font-size: 1.2rem; margin-bottom: 40px; }
 
-        /* Experience Timeline */
         .section { padding: 100px 10%; }
         .section-title { font-family: 'Syncopate', sans-serif; font-size: 2rem; margin-bottom: 50px; border-left: 5px solid var(--accent); padding-left: 20px; }
 
@@ -63,38 +59,35 @@
         .glass-card {
             background: var(--glass); border: 1px solid var(--border);
             padding: 40px; border-radius: 30px; transition: 0.4s;
-            position: relative; overflow: hidden;
+            position: relative; overflow: hidden; text-decoration: none; color: white;
         }
         .glass-card:hover { border-color: var(--accent); background: rgba(255,255,255,0.05); transform: translateY(-5px); }
         .glass-card h3 { font-size: 1.5rem; margin-bottom: 10px; color: var(--accent); }
         .glass-card .meta { font-size: 0.8rem; font-weight: 800; color: #555; text-transform: uppercase; margin-bottom: 20px; display: block; }
 
-        /* Skill Bars */
         .skill-container { margin-top: 30px; }
         .skill-row { margin-bottom: 15px; }
         .skill-name { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 5px; }
         .skill-bar { height: 6px; background: #222; border-radius: 10px; overflow: hidden; }
         .skill-progress { height: 100%; background: var(--accent); border-radius: 10px; }
 
-        /* The 30-Day Sprint Dashboard */
         .sprint-dashboard {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 15px;
         }
         .day-box {
             aspect-ratio: 1/1; background: #0a0a0a; border: 1px solid #1a1a1a;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            border-radius: 15px; transition: 0.3s; cursor: pointer;
+            border-radius: 15px; transition: 0.3s; cursor: pointer; text-decoration: none; color: white;
         }
         .day-box.active { border-color: var(--accent); box-shadow: 0 0 20px rgba(0, 242, 255, 0.2); }
-        .day-box.active i { color: var(--accent); }
+        .day-box.active i { color: var(--accent); margin-bottom: 5px; }
         .day-box span { font-size: 0.7rem; color: #444; margin-top: 5px; font-weight: 800; }
-        .day-box:hover { background: #111; }
+        .day-box.active span { color: #fff; }
+        .day-box:hover { background: #111; border-color: var(--accent); }
 
-        /* Achievements Floating Tags */
-        .tags { display: flex; wrap: wrap; gap: 10px; margin-top: 20px; }
+        .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
         .tag { padding: 5px 15px; border-radius: 50px; border: 1px solid var(--border); font-size: 0.8rem; color: var(--text-dim); }
 
-        /* Contact FAB */
         .contact-btn {
             position: fixed; bottom: 40px; right: 40px;
             background: var(--accent); color: #000; padding: 20px 40px;
@@ -190,19 +183,26 @@
         <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 50px;">
             <h2 class="section-title" style="margin-bottom: 0;">The 30-Day Project Sprint</h2>
             <div style="text-align: right;">
-                <h1 style="font-size: 4rem; color: var(--accent); margin: 0;">01</h1>
+                <h1 style="font-size: 4rem; color: var(--accent); margin: 0;">02</h1>
                 <span style="font-size: 0.7rem; font-weight: 800; color: #444;">PROJECTS LIVE</span>
             </div>
         </div>
 
         <div class="sprint-dashboard" id="sprint-grid">
-            <div class="day-box active">
-                <i class="fas fa-rocket"></i>
+            <a href="#" class="day-box active">
+                <i class="fas fa-user-tie"></i>
                 <span>DAY 01</span>
-            </div>
+            </a>
+            
+            <a href="https://visionary-bombolone-db8f7f.netlify.app/" target="_blank" class="day-box active">
+                <i class="fas fa-rocket"></i>
+                <span>DAY 02</span>
+            </a>
+
             <script>
                 const grid = document.getElementById('sprint-grid');
-                for(let i=2; i<=30; i++) {
+                // Loop starts from 3 because Day 1 and 2 are added manually above
+                for(let i=3; i<=30; i++) {
                     grid.innerHTML += `
                         <div class="day-box">
                             <i class="fas fa-lock" style="font-size: 0.8rem; color: #222;"></i>
