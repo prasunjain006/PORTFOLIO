@@ -7,40 +7,39 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* SECTION 1: CUSTOM ROOT & ANIMATIONS (100+ Lines) */
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
         
         :root {
             --primary: #2563eb;
             --secondary: #6366f1;
-            --accent: #f59e0b;
             --dark: #0f172a;
         }
 
-        * { scroll-behavior: smooth; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f1f5f9; overflow-x: hidden; }
-
-        .glass-nav { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
         .hero-bg { background: radial-gradient(circle at top right, #1e293b, #0f172a); position: relative; overflow: hidden; }
         
-        /* Floating Animation for Visual Interest */
-        .float { animation: floating 3s ease-in-out infinite; }
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
+        /* Profile Shape Change (Hexagon to Hide Symbols) */
+        .profile-shape {
+            width: 380px;
+            height: 420px;
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+            object-fit: cover;
+            border: 4px solid var(--primary);
+            transition: all 0.5s ease;
+        }
+        
+        .profile-container {
+            position: relative;
+            padding: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
         }
 
         .gradient-text { background: linear-gradient(to right, #60a5fa, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .project-card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+        .glass-nav { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(15px); }
         
-        /* Custom Progress Bars */
-        .skill-container { margin-bottom: 20px; }
-        .skill-bar { height: 8px; background: #e2e8f0; border-radius: 4px; position: relative; overflow: hidden; }
-        .skill-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); border-radius: 4px; transition: width 1s ease-in-out; }
-
-        /* [SECTION 2: EXTRAORDINARY COMPONENTS] */
-        .experience-card::before { content: ""; position: absolute; left: -9px; top: 0; height: 100%; width: 2px; background: #cbd5e1; }
+        .skill-bar { height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; }
+        .skill-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); }
     </style>
 </head>
 <body>
@@ -53,9 +52,8 @@
         <div class="hidden md:flex space-x-8 font-semibold text-slate-600">
             <a href="#about" class="hover:text-blue-600 transition">Experience</a>
             <a href="#projects" class="hover:text-blue-600 transition">Projects</a>
-            <a href="#skills" class="hover:text-blue-600 transition">Skills</a>
             <a href="#certs" class="hover:text-blue-600 transition">Certs</a>
-            <a href="#contact" class="bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700 transition">Hire Me</a>
+            <a href="mailto:prasunjain006@gmail.com" class="bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700 transition">Hire Me</a>
         </div>
     </nav>
 
@@ -63,202 +61,73 @@
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
             <div class="text-white">
                 <h2 class="text-blue-400 font-bold tracking-widest uppercase mb-4">Leading the Agentic Era</h2>
-                <h1 class="text-6xl md:text-8xl font-extrabold leading-tight">I Build <span class="gradient-text">Autonomous</span> Systems.</h1>
+                <h1 class="text-6xl md:text-7xl font-extrabold leading-tight">I Build <span class="gradient-text">Autonomous</span> Systems.</h1>
                 <p class="mt-8 text-slate-400 text-lg leading-relaxed">
-                    Dedicated BCA student at Parul University[cite: 2, 21]. Specializing in Generative AI, Python, and Cloud technologies. Proven track record in building autonomous agents and managing technical workflows using Azure and GitHub[cite: 2, 6, 7].
+                    Dedicated BCA student at Parul University specializing in Generative AI, Python, and Cloud technologies. Proven track record in building autonomous agents and managing technical workflows using Azure and GitHub.
                 </p>
                 <div class="mt-10 flex gap-6">
                     <button class="bg-blue-600 px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-500/30">Download Resume</button>
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 rounded-full border border-slate-700 flex items-center justify-center hover:bg-slate-800 cursor-pointer transition">
-                            <i class="fab fa-linkedin-in"></i>
-                        </div>
-                        <div class="w-12 h-12 rounded-full border border-slate-700 flex items-center justify-center hover:bg-slate-800 cursor-pointer transition">
-                            <i class="fab fa-github"></i>
-                        </div>
+                    <div class="flex items-center gap-4">
+                        <a href="https://linkedin.com/in/prasunjain06" class="text-2xl hover:text-blue-400 transition"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/prasunjain006" class="text-2xl hover:text-slate-400 transition"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="hidden md:block float">
-                <div class="relative">
-                    <div class="absolute -top-10 -left-10 w-40 h-40 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
-                    <img src="prasun.jpeg" alt="Prasun Jain" class="relative z-10 w-96 h-[500px] object-cover rounded-[40px] border-8 border-slate-800 shadow-2xl">
-                    <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-amber-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+            
+            <div class="hidden md:flex justify-center">
+                <div class="profile-container">
+                    <img src="prasun.jpeg" alt="Prasun Jain" class="profile-shape">
                 </div>
             </div>
         </div>
     </header>
 
-    <section class="py-24 bg-white relative">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-12">
-                <div class="text-center group">
-                    <div class="text-5xl font-black text-slate-900 group-hover:text-blue-600 transition">15%</div>
-                    <div class="text-slate-500 font-bold mt-2 uppercase tracking-tighter">Business Efficiency </div>
-                </div>
-                <div class="text-center group">
-                    <div class="text-5xl font-black text-slate-900 group-hover:text-blue-600 transition">150+</div>
-                    <div class="text-slate-500 font-bold mt-2 uppercase tracking-tighter">Community Members</div>
-                </div>
-                <div class="text-center group">
-                    <div class="text-5xl font-black text-slate-900 group-hover:text-blue-600 transition">20+</div>
-                    <div class="text-slate-500 font-bold mt-2 uppercase tracking-tighter">Hours Saved/Mo [cite: 2, 15]</div>
-                </div>
-                <div class="text-center group">
-                    <div class="text-5xl font-black text-slate-900 group-hover:text-blue-600 transition">90+</div>
-                    <div class="text-slate-500 font-bold mt-2 uppercase tracking-tighter">Resume Score</div>
-                </div>
+    <section class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-12">
+            <div class="text-center">
+                <div class="text-5xl font-black text-slate-900">15%</div>
+                <div class="text-slate-500 font-bold mt-2 uppercase text-xs">Business Efficiency</div>
+            </div>
+            <div class="text-center">
+                <div class="text-5xl font-black text-slate-900">150+</div>
+                <div class="text-slate-500 font-bold mt-2 uppercase text-xs">Community Members</div>
+            </div>
+            <div class="text-center">
+                <div class="text-5xl font-black text-slate-900">20+</div>
+                <div class="text-slate-500 font-bold mt-2 uppercase text-xs">Hours Saved/Mo</div>
+            </div>
+            <div class="text-center">
+                <div class="text-5xl font-black text-slate-900">90+</div>
+                <div class="text-slate-500 font-bold mt-2 uppercase text-xs">Resume Score</div>
             </div>
         </div>
     </section>
 
-    <section id="projects" class="py-32 bg-slate-50 px-6">
+    <section id="projects" class="py-24 bg-slate-50 px-6">
         <div class="max-w-7xl mx-auto">
-            <div class="flex justify-between items-end mb-20">
-                <div>
-                    <h3 class="text-blue-600 font-bold uppercase tracking-widest mb-4 italic">Portfolio</h3>
-                    <h2 class="text-5xl font-black text-slate-900 leading-tight">Technical Mastery &<br>Featured Solutions.</h2>
+            <h2 class="text-4xl font-black text-slate-900 mb-16 italic">Technical Mastery.</h2>
+            <div class="grid md:grid-cols-3 gap-10">
+                <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl transition">
+                    <span class="text-blue-600 text-xs font-bold uppercase">Automation</span>
+                    <h4 class="text-2xl font-bold mt-2 mb-4">ContentForge AI</h4>
+                    <p class="text-slate-600 text-sm">Improved content generation speed by 40% using Python and Azure integration.</p>
                 </div>
-                <p class="text-slate-500 max-w-sm">Passionately solving real-world problems through innovative AI solutions and scalable web applications[cite: 2, 9].</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <div class="group relative bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm project-card transition-all duration-300">
-                    <div class="h-64 bg-slate-900 flex items-center justify-center text-slate-700 text-4xl font-bold">ContentForge</div>
-                    <div class="p-8">
-                        <span class="text-blue-600 text-xs font-bold uppercase tracking-widest">Automation</span>
-                        <h4 class="text-2xl font-bold mt-2 text-slate-900">ContentForge AI</h4>
-                        <p class="mt-4 text-slate-600 leading-relaxed">Improved content generation speed by 40% using Python and Azure[cite: 2, 17].</p>
-                        <div class="mt-6 flex gap-2">
-                            <span class="px-3 py-1 bg-slate-100 rounded-full text-xs font-semibold text-slate-500">Python</span>
-                            <span class="px-3 py-1 bg-slate-100 rounded-full text-xs font-semibold text-slate-500">Azure</span>
-                        </div>
-                    </div>
+                <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl transition">
+                    <span class="text-blue-600 text-xs font-bold uppercase">Agentic AI</span>
+                    <h4 class="text-2xl font-bold mt-2 mb-4">Financial News Agent</h4>
+                    <p class="text-slate-600 text-sm">Context-aware analytics engine featured by Parul University developer team.</p>
                 </div>
-
-                <div class="group relative bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm project-card transition-all duration-300">
-                    <div class="h-64 bg-blue-900 flex items-center justify-center text-blue-700 text-4xl font-bold italic">GenAI</div>
-                    <div class="p-8">
-                        <span class="text-blue-600 text-xs font-bold uppercase tracking-widest">Agentic AI</span>
-                        <h4 class="text-2xl font-bold mt-2 text-slate-900">Financial News AI Agent</h4>
-                        <p class="mt-4 text-slate-600 leading-relaxed">Context-aware analytics featured by Parul University developer team.</p>
-                        <div class="mt-6 flex gap-2">
-                            <span class="px-3 py-1 bg-slate-100 rounded-full text-xs font-semibold text-slate-500">LangChain</span>
-                            <span class="px-3 py-1 bg-slate-100 rounded-full text-xs font-semibold text-slate-500">LLM</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="group relative bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm project-card transition-all duration-300">
-                    <div class="h-64 bg-amber-900 flex items-center justify-center text-amber-700 text-4xl font-bold">BI Suite</div>
-                    <div class="p-8">
-                        <span class="text-blue-600 text-xs font-bold uppercase tracking-widest">Data Analytics</span>
-                        <h4 class="text-2xl font-bold mt-2 text-slate-900">Shah Pratapmal Suite</h4>
-                        <p class="mt-4 text-slate-600 leading-relaxed">AI-powered analytics automating data extraction, reducing manual reporting time[cite: 2, 15].</p>
-                        <div class="mt-6 flex gap-2">
-                            <span class="px-3 py-1 bg-slate-100 rounded-full text-xs font-semibold text-slate-500">Power BI</span>
-                            <span class="px-3 py-1 bg-slate-100 rounded-full text-xs font-semibold text-slate-500">SQL</span>
-                        </div>
-                    </div>
+                <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl transition">
+                    <span class="text-blue-600 text-xs font-bold uppercase">Data</span>
+                    <h4 class="text-2xl font-bold mt-2 mb-4">Shah Pratapmal Suite</h4>
+                    <p class="text-slate-600 text-sm">Automated reporting and data extraction increasing firm efficiency by 15%.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="skills" class="py-32 bg-white px-6">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-24 items-start">
-            <div>
-                <h3 class="text-blue-600 font-bold uppercase tracking-widest mb-4 italic">Experience</h3>
-                <h2 class="text-5xl font-black text-slate-900 leading-tight mb-12">Professional Timeline.</h2>
-                
-                <div class="space-y-12 relative">
-                    <div class="relative pl-8 experience-card">
-                        <h4 class="text-xl font-bold">Owner / Technical Lead</h4>
-                        <p class="text-blue-600 font-bold">Shah Pratapmal Champalal • 2020 - Present [cite: 2, 13]</p>
-                        <p class="mt-4 text-slate-500">Directed multi-departmental initiatives, achieving a 15% increase in operational efficiency through automated workflow streamlining. Managed transactions for 50+ clients[cite: 2, 16].</p>
-                    </div>
-                    <div class="relative pl-8 experience-card">
-                        <h4 class="text-xl font-bold">BCA Student</h4>
-                        <p class="text-blue-600 font-bold">Parul University Vadodara • 2025 - 2028 [cite: 2, 21]</p>
-                        <p class="mt-4 text-slate-500">Specializing in Computer Science and Generative AI. Community Lead for 100+ students[cite: 2, 8, 20].</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-slate-50 p-12 rounded-[40px]">
-                <h3 class="text-2xl font-bold mb-10 text-slate-900 italic">Technical Arsenal </h3>
-                
-                <div class="skill-container">
-                    <div class="flex justify-between mb-2"><span class="font-bold text-slate-700">Python & AI Agents</span><span class="font-bold text-blue-600">95%</span></div>
-                    <div class="skill-bar"><div class="skill-fill" style="width: 95%;"></div></div>
-                </div>
-                <div class="skill-container">
-                    <div class="flex justify-between mb-2"><span class="font-bold text-slate-700">Java & Kotlin</span><span class="font-bold text-blue-600">88%</span></div>
-                    <div class="skill-bar"><div class="skill-fill" style="width: 88%;"></div></div>
-                </div>
-                <div class="skill-container">
-                    <div class="flex justify-between mb-2"><span class="font-bold text-slate-700">Cloud (Azure/Git)</span><span class="font-bold text-blue-600">92%</span></div>
-                    <div class="skill-bar"><div class="skill-fill" style="width: 92%;"></div></div>
-                </div>
-                <div class="skill-container">
-                    <div class="flex justify-between mb-2"><span class="font-bold text-slate-700">Data Analytics (SQL/BI)</span><span class="font-bold text-blue-600">90%</span></div>
-                    <div class="skill-bar"><div class="skill-fill" style="width: 90%;"></div></div>
-                </div>
-
-                <div class="mt-12 grid grid-cols-2 gap-4">
-                    <div class="bg-white p-4 rounded-2xl border border-slate-200 text-center font-bold text-slate-600">Prompt Engineering [cite: 2, 58]</div>
-                    <div class="bg-white p-4 rounded-2xl border border-slate-200 text-center font-bold text-slate-600">Cybersecurity [cite: 2, 66]</div>
-                    <div class="bg-white p-4 rounded-2xl border border-slate-200 text-center font-bold text-slate-600">LangChain [cite: 2, 60]</div>
-                    <div class="bg-white p-4 rounded-2xl border border-slate-200 text-center font-bold text-slate-600">LLM Integration [cite: 2, 61]</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="certs" class="py-32 bg-slate-900 px-6">
-        <div class="max-w-7xl mx-auto text-center">
-            <h3 class="text-blue-400 font-bold uppercase tracking-widest mb-4">Validations</h3>
-            <h2 class="text-5xl font-black text-white mb-20">Verified Credentials.</h2>
-
-            <div class="grid md:grid-cols-4 gap-6">
-                <div class="bg-slate-800 p-8 rounded-3xl border border-slate-700 hover:border-blue-500 transition-all">
-                    <div class="text-blue-500 text-4xl mb-6"><i class="fas fa-robot"></i></div>
-                    <p class="text-white font-bold italic">Unlocking ChatGPT Power</p>
-                    <p class="text-slate-500 text-sm mt-2">Parul University [cite: 2, 27]</p>
-                </div>
-                <div class="bg-slate-800 p-8 rounded-3xl border border-slate-700 hover:border-blue-500 transition-all">
-                    <div class="text-blue-500 text-4xl mb-6"><i class="fas fa-shield-alt"></i></div>
-                    <p class="text-white font-bold italic">Cybersecurity Awareness</p>
-                    <p class="text-slate-500 text-sm mt-2">HP LIFE</p>
-                </div>
-                <div class="bg-slate-800 p-8 rounded-3xl border border-slate-700 hover:border-blue-500 transition-all">
-                    <div class="text-blue-500 text-4xl mb-6"><i class="fas fa-brain"></i></div>
-                    <p class="text-white font-bold italic">AI Tools Workshop</p>
-                    <p class="text-slate-500 text-sm mt-2">Google [cite: 2, 33]</p>
-                </div>
-                <div class="bg-slate-800 p-8 rounded-3xl border border-slate-700 hover:border-blue-500 transition-all">
-                    <div class="text-blue-500 text-4xl mb-6"><i class="fas fa-database"></i></div>
-                    <p class="text-white font-bold italic">Data Analytics Skills</p>
-                    <p class="text-slate-500 text-sm mt-2">LinkedIn</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer id="contact" class="py-20 bg-white border-t border-slate-100">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-12">
-            <div>
-                <h3 class="text-3xl font-black text-slate-900 uppercase">Let's Build Something<br><span class="text-blue-600 italic">Extraordinary.</span></h3>
-                <p class="mt-4 text-slate-500">Based in Sojat Road, Rajasthan. Resident Developer @ Parul Univ.</p>
-            </div>
-            <div class="flex gap-4">
-                <a href="mailto:prasunjain006@gmail.com" class="bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-700 transition">Contact Me</a>
-                <a href="https://chat.whatsapp.com/LswlaurKFUC1URBD31UKk5" class="border border-slate-200 px-8 py-4 rounded-2xl font-bold hover:bg-slate-50 transition">WhatsApp Group</a>
-            </div>
-        </div>
-        <div class="max-w-7xl mx-auto px-6 mt-20 pt-10 border-t border-slate-50 text-center text-slate-400 text-sm italic">
-            © 2026 Prasun Jain. All Rights Reserved. Engineered with Agentic Principles.
-        </div>
+    <footer class="py-12 bg-white border-t text-center">
+        <p class="text-slate-500 italic">© 2026 Prasun Jain. Engineered in Sojat Road, Rajasthan.</p>
     </footer>
 
 </body>
