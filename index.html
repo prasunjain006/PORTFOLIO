@@ -3,266 +3,263 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRASUN JAIN | CORE_SYSTEM_V6.0</title>
+    <title>Prasun Jain | AI Engineer & Entrepreneur</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* [SECTION 1: CORE ARCHITECTURE] */
+        /* SECTION 1: CUSTOM ROOT & ANIMATIONS (100+ Lines) */
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+        
         :root {
-            --neon-green: #00ff41;
-            --dim-green: #003b00;
-            --bg-black: #050505;
-            --white: #ffffff;
-            --red: #ff003c;
-            --blue: #008cff;
+            --primary: #2563eb;
+            --secondary: #6366f1;
+            --accent: #f59e0b;
+            --dark: #0f172a;
         }
 
-        * { box-sizing: border-box; cursor: crosshair; }
-        body, html {
-            background-color: var(--bg-black);
-            color: var(--neon-green);
-            font-family: 'Courier New', Courier, monospace;
-            margin: 0; padding: 0;
-            height: 100vh; width: 100vw;
-            overflow: hidden;
-            text-shadow: 0 0 5px var(--neon-green);
+        * { scroll-behavior: smooth; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f1f5f9; overflow-x: hidden; }
+
+        .glass-nav { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+        .hero-bg { background: radial-gradient(circle at top right, #1e293b, #0f172a); position: relative; overflow: hidden; }
+        
+        /* Floating Animation for Visual Interest */
+        .float { animation: floating 3s ease-in-out infinite; }
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
         }
 
-        #matrix-canvas {
-            position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -1; opacity: 0.15;
-        }
+        .gradient-text { background: linear-gradient(to right, #60a5fa, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .project-card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+        
+        /* Custom Progress Bars */
+        .skill-container { margin-bottom: 20px; }
+        .skill-bar { height: 8px; background: #e2e8f0; border-radius: 4px; position: relative; overflow: hidden; }
+        .skill-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); border-radius: 4px; transition: width 1s ease-in-out; }
 
-        .terminal-container {
-            display: grid;
-            grid-template-columns: 320px 1fr;
-            grid-template-rows: auto 1fr auto;
-            height: 100vh;
-            width: 100vw;
-            border: 1px solid var(--dim-green);
-            padding: 10px;
-            gap: 10px;
-        }
-
-        /* Sidebar Identity Module */
-        .sidebar {
-            grid-row: 1 / 4;
-            border-right: 2px double var(--dim-green);
-            padding: 20px;
-            overflow-y: auto;
-            background: rgba(0, 0, 0, 0.85);
-            z-index: 5;
-        }
-
-        .p-image-box {
-            width: 100%; border: 2px solid var(--neon-green);
-            padding: 5px; position: relative; 
-            box-shadow: 0 0 15px var(--dim-green);
-        }
-
-        .p-image-box img {
-            width: 100%; filter: grayscale(1) contrast(1.2);
-            transition: 0.5s;
-        }
-
-        .p-image-box:hover img { filter: none; transform: scale(1.05); }
-
-        /* Performance Gauges */
-        .stat-label { font-size: 11px; margin: 10px 0 2px 0; color: var(--white); }
-        .stat-bar { background: var(--dim-green); height: 6px; position: relative; margin-bottom: 10px; }
-        .stat-fill { background: var(--neon-green); height: 100%; box-shadow: 0 0 10px var(--neon-green); }
-
-        /* Main OS Viewport */
-        #main-display {
-            grid-column: 2 / 3;
-            grid-row: 2 / 3;
-            padding: 30px;
-            overflow-y: auto;
-            background: rgba(0, 5, 0, 0.95);
-            border: 1px inset var(--dim-green);
-            position: relative;
-        }
-
-        .glitch-text { animation: glitch 2.5s infinite; font-weight: bold; }
-        @keyframes glitch {
-            0% { text-shadow: 2px 0 red, -2px 0 blue; }
-            50% { text-shadow: -2px 0 red, 2px 0 blue; }
-            100% { text-shadow: 2px 0 red, -2px 0 blue; }
-        }
-
-        /* Project & Cert Grid */
-        .grid-layout { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; margin-top: 15px; }
-        .data-card {
-            border: 1px solid var(--dim-green);
-            padding: 15px; background: rgba(0, 30, 0, 0.4);
-            transition: 0.3s ease;
-        }
-        .data-card:hover { border-color: var(--neon-green); background: rgba(0, 60, 0, 0.7); }
-
-        .input-wrapper { display: flex; align-items: center; background: #000; padding: 10px; border-top: 1px solid var(--dim-green); }
-        #cmd-field { background: transparent; border: none; color: var(--neon-green); width: 100%; outline: none; font-family: inherit; font-size: 18px; }
-
-        .tag { font-size: 10px; padding: 2px 5px; border-radius: 2px; margin-right: 5px; background: var(--dim-green); color: var(--white); }
+        /* [SECTION 2: EXTRAORDINARY COMPONENTS] */
+        .experience-card::before { content: ""; position: absolute; left: -9px; top: 0; height: 100%; width: 2px; background: #cbd5e1; }
     </style>
 </head>
 <body>
-    <canvas id="matrix-canvas"></canvas>
 
-    <div class="terminal-container">
-        <div class="sidebar">
-            <div class="p-image-box">
-                <img src="prasun.jpeg" alt="Prasun Jain">
-            </div>
-            <h2 class="glitch-text" style="text-align: center; margin-bottom: 5px;">PRASUN JAIN</h2>
-            <p style="font-size: 11px; text-align: center; color: var(--blue);">[ GEN-AI & SOFTWARE ARCHITECT ]</p>
-            <hr style="border-color: var(--dim-green);">
-            
-            <div class="metrics">
-                <div class="stat-label">AI AGENTS / LLM</div>
-                <div class="stat-bar"><div class="stat-fill" style="width: 96%;"></div></div>
-                <div class="stat-label">PYTHON / AZURE</div>
-                <div class="stat-bar"><div class="stat-fill" style="width: 92%;"></div></div>
-                <div class="stat-label">CYBERSECURITY</div>
-                <div class="stat-bar"><div class="stat-fill" style="width: 89%;"></div></div>
-                <div class="stat-label">BUSINESS OPS</div>
-                <div class="stat-bar"><div class="stat-fill" style="width: 94%;"></div></div>
-            </div>
-
-            <p style="color: var(--white); font-size: 13px; margin-top: 20px;">> BASE: Sojat, Rajasthan</p>
-            <p style="color: var(--white); font-size: 13px;">> NODE: Parul University</p>
-            <p style="color: var(--white); font-size: 13px;">> EXP: 4+ Years Business</p>
+    <nav class="fixed top-0 w-full z-50 glass-nav py-4 px-8 flex justify-between items-center shadow-sm">
+        <div class="flex items-center gap-2">
+            <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">PJ</div>
+            <span class="font-extrabold text-xl tracking-tighter text-slate-800 uppercase">Prasun Jain</span>
         </div>
-
-        <div style="grid-column: 2/3; padding: 10px; border-bottom: 1px solid var(--dim-green); display: flex; justify-content: space-between; font-size: 12px;">
-            <span>SYSTEM_OVERRIDE: ACTIVE</span>
-            <span>ENCRYPTION: AES-256</span>
-            <span>PRASUN_OS_v6.0</span>
+        <div class="hidden md:flex space-x-8 font-semibold text-slate-600">
+            <a href="#about" class="hover:text-blue-600 transition">Experience</a>
+            <a href="#projects" class="hover:text-blue-600 transition">Projects</a>
+            <a href="#skills" class="hover:text-blue-600 transition">Skills</a>
+            <a href="#certs" class="hover:text-blue-600 transition">Certs</a>
+            <a href="#contact" class="bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700 transition">Hire Me</a>
         </div>
+    </nav>
 
-        <div id="main-display">
-            <div id="content-history">
-                <div style="color: var(--white); font-size: 14px; margin-bottom: 20px;">
-                    [SYSTEM READY]<br>
-                    Welcome, Admin Prasun. Authorized credentials detected.<br>
-                    Current Mission: Solving complex problems with Generative AI.<br><br>
-                    Type <span style="color: #f1c40f">'help'</span> to access encrypted data modules.
+    <header class="hero-bg min-h-screen flex items-center pt-20 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+            <div class="text-white">
+                <h2 class="text-blue-400 font-bold tracking-widest uppercase mb-4">Leading the Agentic Era</h2>
+                <h1 class="text-6xl md:text-8xl font-extrabold leading-tight">I Build <span class="gradient-text">Autonomous</span> Systems.</h1>
+                <p class="mt-8 text-slate-400 text-lg leading-relaxed">
+                    Dedicated BCA student at Parul University[cite: 2, 21]. Specializing in Generative AI, Python, and Cloud technologies. Proven track record in building autonomous agents and managing technical workflows using Azure and GitHub[cite: 2, 6, 7].
+                </p>
+                <div class="mt-10 flex gap-6">
+                    <button class="bg-blue-600 px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-500/30">Download Resume</button>
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-full border border-slate-700 flex items-center justify-center hover:bg-slate-800 cursor-pointer transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </div>
+                        <div class="w-12 h-12 rounded-full border border-slate-700 flex items-center justify-center hover:bg-slate-800 cursor-pointer transition">
+                            <i class="fab fa-github"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hidden md:block float">
+                <div class="relative">
+                    <div class="absolute -top-10 -left-10 w-40 h-40 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+                    <img src="prasun.jpeg" alt="Prasun Jain" class="relative z-10 w-96 h-[500px] object-cover rounded-[40px] border-8 border-slate-800 shadow-2xl">
+                    <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-amber-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
                 </div>
             </div>
         </div>
+    </header>
 
-        <div class="input-wrapper" style="grid-column: 2/3;">
-            <span style="color: var(--white); font-weight: bold;">root@prasun_dev:~$ &nbsp;</span>
-            <input type="text" id="cmd-field" autofocus autocomplete="off">
+    <section class="py-24 bg-white relative">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-12">
+                <div class="text-center group">
+                    <div class="text-5xl font-black text-slate-900 group-hover:text-blue-600 transition">15%</div>
+                    <div class="text-slate-500 font-bold mt-2 uppercase tracking-tighter">Business Efficiency </div>
+                </div>
+                <div class="text-center group">
+                    <div class="text-5xl font-black text-slate-900 group-hover:text-blue-600 transition">150+</div>
+                    <div class="text-slate-500 font-bold mt-2 uppercase tracking-tighter">Community Members</div>
+                </div>
+                <div class="text-center group">
+                    <div class="text-5xl font-black text-slate-900 group-hover:text-blue-600 transition">20+</div>
+                    <div class="text-slate-500 font-bold mt-2 uppercase tracking-tighter">Hours Saved/Mo [cite: 2, 15]</div>
+                </div>
+                <div class="text-center group">
+                    <div class="text-5xl font-black text-slate-900 group-hover:text-blue-600 transition">90+</div>
+                    <div class="text-slate-500 font-bold mt-2 uppercase tracking-tighter">Resume Score</div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <script>
-        // MATRIX ENGINE
-        const canvas = document.getElementById('matrix-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*";
-        const fontSize = 16;
-        const columns = canvas.width / fontSize;
-        const drops = Array(Math.floor(columns)).fill(1);
+    <section id="projects" class="py-32 bg-slate-50 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex justify-between items-end mb-20">
+                <div>
+                    <h3 class="text-blue-600 font-bold uppercase tracking-widest mb-4 italic">Portfolio</h3>
+                    <h2 class="text-5xl font-black text-slate-900 leading-tight">Technical Mastery &<br>Featured Solutions.</h2>
+                </div>
+                <p class="text-slate-500 max-w-sm">Passionately solving real-world problems through innovative AI solutions and scalable web applications[cite: 2, 9].</p>
+            </div>
 
-        function drawMatrix() {
-            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#0F0";
-            ctx.font = fontSize + "px arial";
-            drops.forEach((y, i) => {
-                const text = alphabet[Math.floor(Math.random() * alphabet.length)];
-                ctx.fillText(text, i * fontSize, y * fontSize);
-                if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            });
-        }
-        setInterval(drawMatrix, 50);
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="group relative bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm project-card transition-all duration-300">
+                    <div class="h-64 bg-slate-900 flex items-center justify-center text-slate-700 text-4xl font-bold">ContentForge</div>
+                    <div class="p-8">
+                        <span class="text-blue-600 text-xs font-bold uppercase tracking-widest">Automation</span>
+                        <h4 class="text-2xl font-bold mt-2 text-slate-900">ContentForge AI</h4>
+                        <p class="mt-4 text-slate-600 leading-relaxed">Improved content generation speed by 40% using Python and Azure[cite: 2, 17].</p>
+                        <div class="mt-6 flex gap-2">
+                            <span class="px-3 py-1 bg-slate-100 rounded-full text-xs font-semibold text-slate-500">Python</span>
+                            <span class="px-3 py-1 bg-slate-100 rounded-full text-xs font-semibold text-slate-500">Azure</span>
+                        </div>
+                    </div>
+                </div>
 
-        // DATABASE ARCHIVE
-        const DATABASE = {
-            "help": `
-                AVAILABLE COMMANDS:<br>
-                - <b>whoami</b>: Detailed profile summary.<br>
-                - <b>ls -projects</b>: View 10+ professional AI & software builds.<br>
-                - <b>cat certs</b>: Decrypt 15+ industry-recognized certifications.<br>
-                - <b>status --biz</b>: Business impact at Shah Pratapmal Champalal.<br>
-                - <b>ls --community</b>: Leadership & WhatsApp group (150+ members).<br>
-                - <b>history --edu</b>: Academic journey (2021-2028).<br>
-                - <b>clear</b>: Reset system terminal.`,
-            "whoami": `
-                [NAME]: Prasun Jain<br>
-                [ROLE]: Gen-AI & Cloud Specialist<br>
-                [SUMMARY]: Dedicated BCA student at Parul University.<br>
-                [STRENGTHS]: Proven track record in building autonomous agents and technical workflow management using Azure and GitHub.`,
-            "ls -projects": `
-                <div class="grid-layout">
-                    <div class="data-card"><b>1. Financial News AI Agent</b><br>Context-aware analysis. [Featured by Parul Univ]</div>
-                    <div class="data-card"><b>2. ContentForge AI</b><br>Improved generation speed by 40%.</div>
-                    <div class="data-card"><b>3. AI-Powered Analytics</b><br>Automated data extraction for firm operations.</div>
-                    <div class="data-card"><b>4. Inventory Tracker</b><br>Financial accuracy for 50+ clients.</div>
-                    <div class="data-card"><b>5. Resume Master (90+)</b><br>NLP-driven CV optimization.</div>
-                    <div class="data-card"><b>6. Cyber Threat Bot</b><br>Real-time security monitoring.</div>
-                    <div class="data-card"><b>7. Multi-Agent Suite</b><br>Autonomous task handling engine.</div>
-                    <div class="data-card"><b>8. Fitness Assistant</b><br>Personalized AI health coach.</div>
-                </div>`,
-            "cat certs": `
-                <div class="grid-layout">
-                    <div class="data-card"><span class="tag">AI</span> Unlocking ChatGPT Power (Parul Univ)</div>
-                    <div class="data-card"><span class="tag">AI</span> Build an AI Agent (IBM)</div>
-                    <div class="data-card"><span class="tag">AI</span> Gen-AI & Prompting (Parul Univ)</div>
-                    <div class="data-card"><span class="tag">CYBER</span> Cybersecurity Simulation (Forage)</div>
-                    <div class="data-card"><span class="tag">DATA</span> Power BI Data Viz (Office Master)</div>
-                    <div class="data-card"><span class="tag">CLOUD</span> Cybersecurity with Cloud (LinkedIn)</div>
-                    <div class="data-card"><span class="tag">GOOGLE</span> Web Dev & Hosting (Google)</div>
-                </div>`,
-            "status --biz": `
-                [BUSINESS ENTITY]: Shah Pratapmal Champalal<br>
-                [EFFICIENCY]: 15% increase in operational performance.<br>
-                [TIME SAVED]: 20+ hours per month via automated reporting.<br>
-                [ACCURACY]: 100% financial precision for 50+ local clients.`,
-            "ls --community": `
-                [ROLE]: Community Admin<br>
-                [TARGET]: "BCA GUYS" WhatsApp Community.<br>
-                [MEMBERS]: 150+ Student peers.<br>
-                [IMPACT]: Increased engagement by 25% via academic resource coordination.`,
-            "history --edu": `
-                - <b>[2025-2028]</b> BCA @ Parul University Vadodara.<br>
-                - <b>[2024-2025]</b> 12th Computer Science (Rajasthan Board). Mr. Farewell Award.<br>
-                - <b>[2021-2022]</b> 10th Standard (Rajasthan Board).`
-        };
+                <div class="group relative bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm project-card transition-all duration-300">
+                    <div class="h-64 bg-blue-900 flex items-center justify-center text-blue-700 text-4xl font-bold italic">GenAI</div>
+                    <div class="p-8">
+                        <span class="text-blue-600 text-xs font-bold uppercase tracking-widest">Agentic AI</span>
+                        <h4 class="text-2xl font-bold mt-2 text-slate-900">Financial News AI Agent</h4>
+                        <p class="mt-4 text-slate-600 leading-relaxed">Context-aware analytics featured by Parul University developer team.</p>
+                        <div class="mt-6 flex gap-2">
+                            <span class="px-3 py-1 bg-slate-100 rounded-full text-xs font-semibold text-slate-500">LangChain</span>
+                            <span class="px-3 py-1 bg-slate-100 rounded-full text-xs font-semibold text-slate-500">LLM</span>
+                        </div>
+                    </div>
+                </div>
 
-        const cmdField = document.getElementById('cmd-field');
-        const historyDiv = document.getElementById('content-history');
-        const display = document.getElementById('main-display');
+                <div class="group relative bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm project-card transition-all duration-300">
+                    <div class="h-64 bg-amber-900 flex items-center justify-center text-amber-700 text-4xl font-bold">BI Suite</div>
+                    <div class="p-8">
+                        <span class="text-blue-600 text-xs font-bold uppercase tracking-widest">Data Analytics</span>
+                        <h4 class="text-2xl font-bold mt-2 text-slate-900">Shah Pratapmal Suite</h4>
+                        <p class="mt-4 text-slate-600 leading-relaxed">AI-powered analytics automating data extraction, reducing manual reporting time[cite: 2, 15].</p>
+                        <div class="mt-6 flex gap-2">
+                            <span class="px-3 py-1 bg-slate-100 rounded-full text-xs font-semibold text-slate-500">Power BI</span>
+                            <span class="px-3 py-1 bg-slate-100 rounded-full text-xs font-semibold text-slate-500">SQL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        cmdField.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                const cmd = cmdField.value.toLowerCase().trim();
-                const output = document.createElement('div');
-                output.style.margin = "15px 0";
-                output.innerHTML = `<span style="color:white; font-weight:bold;">root@prasun_dev:~$</span> ${cmd}`;
+    <section id="skills" class="py-32 bg-white px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-24 items-start">
+            <div>
+                <h3 class="text-blue-600 font-bold uppercase tracking-widest mb-4 italic">Experience</h3>
+                <h2 class="text-5xl font-black text-slate-900 leading-tight mb-12">Professional Timeline.</h2>
                 
-                historyDiv.appendChild(output);
+                <div class="space-y-12 relative">
+                    <div class="relative pl-8 experience-card">
+                        <h4 class="text-xl font-bold">Owner / Technical Lead</h4>
+                        <p class="text-blue-600 font-bold">Shah Pratapmal Champalal • 2020 - Present [cite: 2, 13]</p>
+                        <p class="mt-4 text-slate-500">Directed multi-departmental initiatives, achieving a 15% increase in operational efficiency through automated workflow streamlining. Managed transactions for 50+ clients[cite: 2, 16].</p>
+                    </div>
+                    <div class="relative pl-8 experience-card">
+                        <h4 class="text-xl font-bold">BCA Student</h4>
+                        <p class="text-blue-600 font-bold">Parul University Vadodara • 2025 - 2028 [cite: 2, 21]</p>
+                        <p class="mt-4 text-slate-500">Specializing in Computer Science and Generative AI. Community Lead for 100+ students[cite: 2, 8, 20].</p>
+                    </div>
+                </div>
+            </div>
 
-                if (cmd === 'clear') {
-                    historyDiv.innerHTML = '';
-                } else if (DATABASE[cmd]) {
-                    const res = document.createElement('div');
-                    res.innerHTML = DATABASE[cmd];
-                    historyDiv.appendChild(res);
-                } else {
-                    const err = document.createElement('div');
-                    err.style.color = 'var(--red)';
-                    err.innerHTML = `> ERROR: Command '${cmd}' not found in system core.`;
-                    historyDiv.appendChild(err);
-                }
+            <div class="bg-slate-50 p-12 rounded-[40px]">
+                <h3 class="text-2xl font-bold mb-10 text-slate-900 italic">Technical Arsenal </h3>
+                
+                <div class="skill-container">
+                    <div class="flex justify-between mb-2"><span class="font-bold text-slate-700">Python & AI Agents</span><span class="font-bold text-blue-600">95%</span></div>
+                    <div class="skill-bar"><div class="skill-fill" style="width: 95%;"></div></div>
+                </div>
+                <div class="skill-container">
+                    <div class="flex justify-between mb-2"><span class="font-bold text-slate-700">Java & Kotlin</span><span class="font-bold text-blue-600">88%</span></div>
+                    <div class="skill-bar"><div class="skill-fill" style="width: 88%;"></div></div>
+                </div>
+                <div class="skill-container">
+                    <div class="flex justify-between mb-2"><span class="font-bold text-slate-700">Cloud (Azure/Git)</span><span class="font-bold text-blue-600">92%</span></div>
+                    <div class="skill-bar"><div class="skill-fill" style="width: 92%;"></div></div>
+                </div>
+                <div class="skill-container">
+                    <div class="flex justify-between mb-2"><span class="font-bold text-slate-700">Data Analytics (SQL/BI)</span><span class="font-bold text-blue-600">90%</span></div>
+                    <div class="skill-bar"><div class="skill-fill" style="width: 90%;"></div></div>
+                </div>
 
-                cmdField.value = '';
-                display.scrollTop = display.scrollHeight;
-            }
-        });
-    </script>
+                <div class="mt-12 grid grid-cols-2 gap-4">
+                    <div class="bg-white p-4 rounded-2xl border border-slate-200 text-center font-bold text-slate-600">Prompt Engineering [cite: 2, 58]</div>
+                    <div class="bg-white p-4 rounded-2xl border border-slate-200 text-center font-bold text-slate-600">Cybersecurity [cite: 2, 66]</div>
+                    <div class="bg-white p-4 rounded-2xl border border-slate-200 text-center font-bold text-slate-600">LangChain [cite: 2, 60]</div>
+                    <div class="bg-white p-4 rounded-2xl border border-slate-200 text-center font-bold text-slate-600">LLM Integration [cite: 2, 61]</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="certs" class="py-32 bg-slate-900 px-6">
+        <div class="max-w-7xl mx-auto text-center">
+            <h3 class="text-blue-400 font-bold uppercase tracking-widest mb-4">Validations</h3>
+            <h2 class="text-5xl font-black text-white mb-20">Verified Credentials.</h2>
+
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="bg-slate-800 p-8 rounded-3xl border border-slate-700 hover:border-blue-500 transition-all">
+                    <div class="text-blue-500 text-4xl mb-6"><i class="fas fa-robot"></i></div>
+                    <p class="text-white font-bold italic">Unlocking ChatGPT Power</p>
+                    <p class="text-slate-500 text-sm mt-2">Parul University [cite: 2, 27]</p>
+                </div>
+                <div class="bg-slate-800 p-8 rounded-3xl border border-slate-700 hover:border-blue-500 transition-all">
+                    <div class="text-blue-500 text-4xl mb-6"><i class="fas fa-shield-alt"></i></div>
+                    <p class="text-white font-bold italic">Cybersecurity Awareness</p>
+                    <p class="text-slate-500 text-sm mt-2">HP LIFE</p>
+                </div>
+                <div class="bg-slate-800 p-8 rounded-3xl border border-slate-700 hover:border-blue-500 transition-all">
+                    <div class="text-blue-500 text-4xl mb-6"><i class="fas fa-brain"></i></div>
+                    <p class="text-white font-bold italic">AI Tools Workshop</p>
+                    <p class="text-slate-500 text-sm mt-2">Google [cite: 2, 33]</p>
+                </div>
+                <div class="bg-slate-800 p-8 rounded-3xl border border-slate-700 hover:border-blue-500 transition-all">
+                    <div class="text-blue-500 text-4xl mb-6"><i class="fas fa-database"></i></div>
+                    <p class="text-white font-bold italic">Data Analytics Skills</p>
+                    <p class="text-slate-500 text-sm mt-2">LinkedIn</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="py-20 bg-white border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-12">
+            <div>
+                <h3 class="text-3xl font-black text-slate-900 uppercase">Let's Build Something<br><span class="text-blue-600 italic">Extraordinary.</span></h3>
+                <p class="mt-4 text-slate-500">Based in Sojat Road, Rajasthan. Resident Developer @ Parul Univ.</p>
+            </div>
+            <div class="flex gap-4">
+                <a href="mailto:prasunjain006@gmail.com" class="bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-700 transition">Contact Me</a>
+                <a href="https://chat.whatsapp.com/LswlaurKFUC1URBD31UKk5" class="border border-slate-200 px-8 py-4 rounded-2xl font-bold hover:bg-slate-50 transition">WhatsApp Group</a>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 mt-20 pt-10 border-t border-slate-50 text-center text-slate-400 text-sm italic">
+            © 2026 Prasun Jain. All Rights Reserved. Engineered with Agentic Principles.
+        </div>
+    </footer>
+
 </body>
 </html>
