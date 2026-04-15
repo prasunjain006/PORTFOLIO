@@ -3,231 +3,266 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRASUN JAIN | THE VISIONARY ARCHITECT</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>PRASUN JAIN | CORE_SYSTEM_V6.0</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;600;800&display=swap');
-
+        /* [SECTION 1: CORE ARCHITECTURE] */
         :root {
-            --bg: #000000;
-            --accent: #00f2ff;
-            --glass: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.1);
-            --text-dim: #a1a1a1;
+            --neon-green: #00ff41;
+            --dim-green: #003b00;
+            --bg-black: #050505;
+            --white: #ffffff;
+            --red: #ff003c;
+            --blue: #008cff;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            background: var(--bg); 
-            color: #fff; 
-            font-family: 'Inter', sans-serif; 
-            line-height: 1.6;
-            overflow-x: hidden;
+        * { box-sizing: border-box; cursor: crosshair; }
+        body, html {
+            background-color: var(--bg-black);
+            color: var(--neon-green);
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0; padding: 0;
+            height: 100vh; width: 100vw;
+            overflow: hidden;
+            text-shadow: 0 0 5px var(--neon-green);
         }
 
-        .orb {
-            position: fixed; width: 600px; height: 600px;
-            background: radial-gradient(circle, rgba(0, 242, 255, 0.05) 0%, transparent 70%);
-            border-radius: 50%; z-index: -1; animation: float 20s infinite alternate;
+        #matrix-canvas {
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1; opacity: 0.15;
         }
 
-        @keyframes float {
-            from { transform: translate(-10%, -10%); }
-            to { transform: translate(20%, 20%); }
+        .terminal-container {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            grid-template-rows: auto 1fr auto;
+            height: 100vh;
+            width: 100vw;
+            border: 1px solid var(--dim-green);
+            padding: 10px;
+            gap: 10px;
         }
 
-        nav {
-            position: fixed; width: 100%; padding: 2rem 5%;
-            display: flex; justify-content: space-between; align-items: center;
-            backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); z-index: 1000;
+        /* Sidebar Identity Module */
+        .sidebar {
+            grid-row: 1 / 4;
+            border-right: 2px double var(--dim-green);
+            padding: 20px;
+            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 5;
         }
-        .nav-brand { font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 1.2rem; letter-spacing: 5px; color: var(--accent); }
-        
-        .hero {
-            min-height: 100vh; display: flex; flex-direction: column;
-            justify-content: center; align-items: flex-start; padding: 0 10%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0), #050505);
+
+        .p-image-box {
+            width: 100%; border: 2px solid var(--neon-green);
+            padding: 5px; position: relative; 
+            box-shadow: 0 0 15px var(--dim-green);
         }
-        .hero span { color: var(--accent); font-weight: 800; letter-spacing: 3px; font-size: 0.9rem; text-transform: uppercase; }
-        .hero h1 { font-size: clamp(3rem, 10vw, 7rem); font-family: 'Syncopate', sans-serif; line-height: 1; margin: 20px 0; }
-        .hero p { max-width: 600px; color: var(--text-dim); font-size: 1.2rem; margin-bottom: 40px; }
 
-        .section { padding: 100px 10%; }
-        .section-title { font-family: 'Syncopate', sans-serif; font-size: 2rem; margin-bottom: 50px; border-left: 5px solid var(--accent); padding-left: 20px; }
-
-        .experience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-        .glass-card {
-            background: var(--glass); border: 1px solid var(--border);
-            padding: 40px; border-radius: 30px; transition: 0.4s;
-            position: relative; overflow: hidden; text-decoration: none; color: white;
+        .p-image-box img {
+            width: 100%; filter: grayscale(1) contrast(1.2);
+            transition: 0.5s;
         }
-        .glass-card:hover { border-color: var(--accent); background: rgba(255,255,255,0.05); transform: translateY(-5px); }
-        .glass-card h3 { font-size: 1.5rem; margin-bottom: 10px; color: var(--accent); }
-        .glass-card .meta { font-size: 0.8rem; font-weight: 800; color: #555; text-transform: uppercase; margin-bottom: 20px; display: block; }
 
-        .skill-container { margin-top: 30px; }
-        .skill-row { margin-bottom: 15px; }
-        .skill-name { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 5px; }
-        .skill-bar { height: 6px; background: #222; border-radius: 10px; overflow: hidden; }
-        .skill-progress { height: 100%; background: var(--accent); border-radius: 10px; }
+        .p-image-box:hover img { filter: none; transform: scale(1.05); }
 
-        .sprint-dashboard {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 15px;
+        /* Performance Gauges */
+        .stat-label { font-size: 11px; margin: 10px 0 2px 0; color: var(--white); }
+        .stat-bar { background: var(--dim-green); height: 6px; position: relative; margin-bottom: 10px; }
+        .stat-fill { background: var(--neon-green); height: 100%; box-shadow: 0 0 10px var(--neon-green); }
+
+        /* Main OS Viewport */
+        #main-display {
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+            padding: 30px;
+            overflow-y: auto;
+            background: rgba(0, 5, 0, 0.95);
+            border: 1px inset var(--dim-green);
+            position: relative;
         }
-        .day-box {
-            aspect-ratio: 1/1; background: #0a0a0a; border: 1px solid #1a1a1a;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            border-radius: 15px; transition: 0.3s; cursor: pointer; text-decoration: none; color: white;
-        }
-        .day-box.active { border-color: var(--accent); box-shadow: 0 0 20px rgba(0, 242, 255, 0.2); }
-        .day-box.active i { color: var(--accent); margin-bottom: 5px; }
-        .day-box span { font-size: 0.7rem; color: #444; margin-top: 5px; font-weight: 800; }
-        .day-box.active span { color: #fff; }
-        .day-box:hover { background: #111; border-color: var(--accent); }
 
-        .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
-        .tag { padding: 5px 15px; border-radius: 50px; border: 1px solid var(--border); font-size: 0.8rem; color: var(--text-dim); }
-
-        .contact-btn {
-            position: fixed; bottom: 40px; right: 40px;
-            background: var(--accent); color: #000; padding: 20px 40px;
-            border-radius: 50px; font-weight: 800; text-decoration: none;
-            box-shadow: 0 10px 40px rgba(0, 242, 255, 0.4);
-            display: flex; align-items: center; gap: 10px; transition: 0.3s;
-            z-index: 999;
+        .glitch-text { animation: glitch 2.5s infinite; font-weight: bold; }
+        @keyframes glitch {
+            0% { text-shadow: 2px 0 red, -2px 0 blue; }
+            50% { text-shadow: -2px 0 red, 2px 0 blue; }
+            100% { text-shadow: 2px 0 red, -2px 0 blue; }
         }
-        .contact-btn:hover { transform: scale(1.05); }
 
-        @media (max-width: 900px) {
-            .experience-grid { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 4rem; }
+        /* Project & Cert Grid */
+        .grid-layout { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; margin-top: 15px; }
+        .data-card {
+            border: 1px solid var(--dim-green);
+            padding: 15px; background: rgba(0, 30, 0, 0.4);
+            transition: 0.3s ease;
         }
+        .data-card:hover { border-color: var(--neon-green); background: rgba(0, 60, 0, 0.7); }
+
+        .input-wrapper { display: flex; align-items: center; background: #000; padding: 10px; border-top: 1px solid var(--dim-green); }
+        #cmd-field { background: transparent; border: none; color: var(--neon-green); width: 100%; outline: none; font-family: inherit; font-size: 18px; }
+
+        .tag { font-size: 10px; padding: 2px 5px; border-radius: 2px; margin-right: 5px; background: var(--dim-green); color: var(--white); }
     </style>
 </head>
 <body>
-    <div class="orb"></div>
+    <canvas id="matrix-canvas"></canvas>
 
-    <nav>
-        <div class="nav-brand">PRASUN JAIN</div>
-        <div style="font-size: 0.7rem; font-weight: 800; letter-spacing: 2px;">2025-2028 | BCA SPRINT</div>
-    </nav>
-
-    <section class="hero">
-        <span>Owner of Shah Pratapmal Champalal</span>
-        <h1>BUILD.<br>SCALE.<br>DOMINATE.</h1>
-        <p>Merging 5 years of business legacy with cutting-edge AI. Currently engineering 30 projects in 30 days while managing a 100+ member tech community.</p>
-        <div class="tags">
-            <div class="tag"><i class="fas fa-award"></i> 100/100 CS Score</div>
-            <div class="tag"><i class="fas fa-crown"></i> Mr. Farewell</div>
-            <div class="tag"><i class="fas fa-heart"></i> Blood Donor</div>
-        </div>
-    </section>
-
-    <section class="section">
-        <h2 class="section-title">The Legacy & Logic</h2>
-        <div class="experience-grid">
-            <div class="glass-card">
-                <span class="meta">Since 2021 | Business Mastery</span>
-                <h3>Shah Pratapmal Champalal</h3>
-                <p>Leading a retail clothing business for 5 years. Mastering inventory management, customer psych, and cash flow before even starting college.</p>
-                <div class="tags" style="margin-top: 20px;">
-                    <div class="tag">Retail Ops</div>
-                    <div class="tag">Sales Strategy</div>
-                </div>
+    <div class="terminal-container">
+        <div class="sidebar">
+            <div class="p-image-box">
+                <img src="prasun.jpeg" alt="Prasun Jain">
             </div>
-
-            <div class="glass-card">
-                <span class="meta">Present | Leadership</span>
-                <h3>BCA Community Admin</h3>
-                <p>Commanding a group of 100+ students at Parul University. Coordinating technical resources and fostering a culture of rapid building.</p>
-                <div class="tags" style="margin-top: 20px;">
-                    <div class="tag">Team Management</div>
-                    <div class="tag">Community Growth</div>
-                </div>
-            </div>
-
-            <div class="glass-card">
-                <span class="meta">Project Alpha | AI</span>
-                <h3>Code-Buddy AI</h3>
-                <p>Engineered a custom AI tutor using Gemini API to explain complex coding concepts in <strong>Hindi & Marwari</strong>. Breaking language barriers in tech.</p>
-                <div class="skill-container">
-                    <div class="skill-row">
-                        <div class="skill-name"><span>Prompt Engineering</span><span>95%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 95%;"></div></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="glass-card">
-                <span class="meta">Technical Arsenal</span>
-                <h3>The Skillset</h3>
-                <div class="skill-container">
-                    <div class="skill-row">
-                        <div class="skill-name"><span>C / C++ Mastery</span><span>90%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 90%;"></div></div>
-                    </div>
-                    <div class="skill-row">
-                        <div class="skill-name"><span>Web (HTML/CSS/JS)</span><span>85%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 85%;"></div></div>
-                    </div>
-                    <div class="skill-row">
-                        <div class="skill-name"><span>Advanced Excel</span><span>92%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 92%;"></div></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="challenge" style="background: #050505;">
-        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 50px;">
-            <h2 class="section-title" style="margin-bottom: 0;">The 30-Day Project Sprint</h2>
-            <div style="text-align: right;">
-                <h1 style="font-size: 4rem; color: var(--accent); margin: 0;">02</h1>
-                <span style="font-size: 0.7rem; font-weight: 800; color: #444;">PROJECTS LIVE</span>
-            </div>
-        </div>
-
-        <div class="sprint-dashboard" id="sprint-grid">
-            <a href="#" class="day-box active">
-                <i class="fas fa-user-tie"></i>
-                <span>DAY 01</span>
-            </a>
+            <h2 class="glitch-text" style="text-align: center; margin-bottom: 5px;">PRASUN JAIN</h2>
+            <p style="font-size: 11px; text-align: center; color: var(--blue);">[ GEN-AI & SOFTWARE ARCHITECT ]</p>
+            <hr style="border-color: var(--dim-green);">
             
-            <a href="https://visionary-bombolone-db8f7f.netlify.app/" target="_blank" class="day-box active">
-                <i class="fas fa-rocket"></i>
-                <span>DAY 02</span>
-            </a>
+            <div class="metrics">
+                <div class="stat-label">AI AGENTS / LLM</div>
+                <div class="stat-bar"><div class="stat-fill" style="width: 96%;"></div></div>
+                <div class="stat-label">PYTHON / AZURE</div>
+                <div class="stat-bar"><div class="stat-fill" style="width: 92%;"></div></div>
+                <div class="stat-label">CYBERSECURITY</div>
+                <div class="stat-bar"><div class="stat-fill" style="width: 89%;"></div></div>
+                <div class="stat-label">BUSINESS OPS</div>
+                <div class="stat-bar"><div class="stat-fill" style="width: 94%;"></div></div>
+            </div>
 
-            <script>
-                const grid = document.getElementById('sprint-grid');
-                // Loop starts from 3 because Day 1 and 2 are added manually above
-                for(let i=3; i<=30; i++) {
-                    grid.innerHTML += `
-                        <div class="day-box">
-                            <i class="fas fa-lock" style="font-size: 0.8rem; color: #222;"></i>
-                            <span>DAY ${i < 10 ? '0'+i : i}</span>
-                        </div>
-                    `;
+            <p style="color: var(--white); font-size: 13px; margin-top: 20px;">> BASE: Sojat, Rajasthan</p>
+            <p style="color: var(--white); font-size: 13px;">> NODE: Parul University</p>
+            <p style="color: var(--white); font-size: 13px;">> EXP: 4+ Years Business</p>
+        </div>
+
+        <div style="grid-column: 2/3; padding: 10px; border-bottom: 1px solid var(--dim-green); display: flex; justify-content: space-between; font-size: 12px;">
+            <span>SYSTEM_OVERRIDE: ACTIVE</span>
+            <span>ENCRYPTION: AES-256</span>
+            <span>PRASUN_OS_v6.0</span>
+        </div>
+
+        <div id="main-display">
+            <div id="content-history">
+                <div style="color: var(--white); font-size: 14px; margin-bottom: 20px;">
+                    [SYSTEM READY]<br>
+                    Welcome, Admin Prasun. Authorized credentials detected.<br>
+                    Current Mission: Solving complex problems with Generative AI.<br><br>
+                    Type <span style="color: #f1c40f">'help'</span> to access encrypted data modules.
+                </div>
+            </div>
+        </div>
+
+        <div class="input-wrapper" style="grid-column: 2/3;">
+            <span style="color: var(--white); font-weight: bold;">root@prasun_dev:~$ &nbsp;</span>
+            <input type="text" id="cmd-field" autofocus autocomplete="off">
+        </div>
+    </div>
+
+    <script>
+        // MATRIX ENGINE
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*";
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#0F0";
+            ctx.font = fontSize + "px arial";
+            drops.forEach((y, i) => {
+                const text = alphabet[Math.floor(Math.random() * alphabet.length)];
+                ctx.fillText(text, i * fontSize, y * fontSize);
+                if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            });
+        }
+        setInterval(drawMatrix, 50);
+
+        // DATABASE ARCHIVE
+        const DATABASE = {
+            "help": `
+                AVAILABLE COMMANDS:<br>
+                - <b>whoami</b>: Detailed profile summary.<br>
+                - <b>ls -projects</b>: View 10+ professional AI & software builds.<br>
+                - <b>cat certs</b>: Decrypt 15+ industry-recognized certifications.<br>
+                - <b>status --biz</b>: Business impact at Shah Pratapmal Champalal.<br>
+                - <b>ls --community</b>: Leadership & WhatsApp group (150+ members).<br>
+                - <b>history --edu</b>: Academic journey (2021-2028).<br>
+                - <b>clear</b>: Reset system terminal.`,
+            "whoami": `
+                [NAME]: Prasun Jain<br>
+                [ROLE]: Gen-AI & Cloud Specialist<br>
+                [SUMMARY]: Dedicated BCA student at Parul University.<br>
+                [STRENGTHS]: Proven track record in building autonomous agents and technical workflow management using Azure and GitHub.`,
+            "ls -projects": `
+                <div class="grid-layout">
+                    <div class="data-card"><b>1. Financial News AI Agent</b><br>Context-aware analysis. [Featured by Parul Univ]</div>
+                    <div class="data-card"><b>2. ContentForge AI</b><br>Improved generation speed by 40%.</div>
+                    <div class="data-card"><b>3. AI-Powered Analytics</b><br>Automated data extraction for firm operations.</div>
+                    <div class="data-card"><b>4. Inventory Tracker</b><br>Financial accuracy for 50+ clients.</div>
+                    <div class="data-card"><b>5. Resume Master (90+)</b><br>NLP-driven CV optimization.</div>
+                    <div class="data-card"><b>6. Cyber Threat Bot</b><br>Real-time security monitoring.</div>
+                    <div class="data-card"><b>7. Multi-Agent Suite</b><br>Autonomous task handling engine.</div>
+                    <div class="data-card"><b>8. Fitness Assistant</b><br>Personalized AI health coach.</div>
+                </div>`,
+            "cat certs": `
+                <div class="grid-layout">
+                    <div class="data-card"><span class="tag">AI</span> Unlocking ChatGPT Power (Parul Univ)</div>
+                    <div class="data-card"><span class="tag">AI</span> Build an AI Agent (IBM)</div>
+                    <div class="data-card"><span class="tag">AI</span> Gen-AI & Prompting (Parul Univ)</div>
+                    <div class="data-card"><span class="tag">CYBER</span> Cybersecurity Simulation (Forage)</div>
+                    <div class="data-card"><span class="tag">DATA</span> Power BI Data Viz (Office Master)</div>
+                    <div class="data-card"><span class="tag">CLOUD</span> Cybersecurity with Cloud (LinkedIn)</div>
+                    <div class="data-card"><span class="tag">GOOGLE</span> Web Dev & Hosting (Google)</div>
+                </div>`,
+            "status --biz": `
+                [BUSINESS ENTITY]: Shah Pratapmal Champalal<br>
+                [EFFICIENCY]: 15% increase in operational performance.<br>
+                [TIME SAVED]: 20+ hours per month via automated reporting.<br>
+                [ACCURACY]: 100% financial precision for 50+ local clients.`,
+            "ls --community": `
+                [ROLE]: Community Admin<br>
+                [TARGET]: "BCA GUYS" WhatsApp Community.<br>
+                [MEMBERS]: 150+ Student peers.<br>
+                [IMPACT]: Increased engagement by 25% via academic resource coordination.`,
+            "history --edu": `
+                - <b>[2025-2028]</b> BCA @ Parul University Vadodara.<br>
+                - <b>[2024-2025]</b> 12th Computer Science (Rajasthan Board). Mr. Farewell Award.<br>
+                - <b>[2021-2022]</b> 10th Standard (Rajasthan Board).`
+        };
+
+        const cmdField = document.getElementById('cmd-field');
+        const historyDiv = document.getElementById('content-history');
+        const display = document.getElementById('main-display');
+
+        cmdField.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const cmd = cmdField.value.toLowerCase().trim();
+                const output = document.createElement('div');
+                output.style.margin = "15px 0";
+                output.innerHTML = `<span style="color:white; font-weight:bold;">root@prasun_dev:~$</span> ${cmd}`;
+                
+                historyDiv.appendChild(output);
+
+                if (cmd === 'clear') {
+                    historyDiv.innerHTML = '';
+                } else if (DATABASE[cmd]) {
+                    const res = document.createElement('div');
+                    res.innerHTML = DATABASE[cmd];
+                    historyDiv.appendChild(res);
+                } else {
+                    const err = document.createElement('div');
+                    err.style.color = 'var(--red)';
+                    err.innerHTML = `> ERROR: Command '${cmd}' not found in system core.`;
+                    historyDiv.appendChild(err);
                 }
-            </script>
-        </div>
-    </section>
 
-    <section class="section">
-        <div class="glass-card" style="text-align: center; border: 2px dashed var(--accent);">
-            <h3>Expert Level Marwari Speaker</h3>
-            <p style="color: var(--text-dim); max-width: 600px; margin: 10px auto;">Connecting with the roots of Rajasthan while building the future of Silicon Valley. From Sojat Road to the Global Stage.</p>
-        </div>
-    </section>
-
-    <footer style="padding: 100px 10%; text-align: center; border-top: 1px solid var(--border);">
-        <p style="color: #444; font-weight: 800; letter-spacing: 2px;">PRASUN JAIN &copy; 2026 | ALL RIGHTS RESERVED</p>
-    </footer>
-
-    <a href="https://wa.me/918824937013" class="contact-btn">
-        <i class="fab fa-whatsapp"></i> CONNECT WITH PRASUN
-    </a>
-
+                cmdField.value = '';
+                display.scrollTop = display.scrollHeight;
+            }
+        });
+    </script>
 </body>
 </html>
